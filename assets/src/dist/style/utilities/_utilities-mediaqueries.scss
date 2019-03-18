@@ -1,0 +1,10 @@
+@media (max-width: $screen-width-sm) {
+    .hover-effect {
+
+        &:hover {
+            &:before {
+                background-color: transparent;
+            }
+        }
+    }
+}

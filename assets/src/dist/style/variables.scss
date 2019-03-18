@@ -1,0 +1,83 @@
+//ПЕРЕОПРЕДЕЛЕНИЕ ДЕФОЛТНЫХ ЗНАЧЕНИЙ ПЕРЕМЕННЫХ BOOTSTRAP 4 
+
+//главный цвет
+$primary: #0d6eff;
+$purple: rgb(189, 140, 191);
+
+$input-border-radius: 0;
+$btn-border-radius: 0;
+$input-padding-y: 0.4375rem;
+$input-height: auto;
+$btn-padding-y: 0.4375rem;
+$btn-padding-x: 1.5rem;
+$grey: #e5e5e5;
+$custom-control-indicator-size: 0.8125rem;
+$custom-control-gutter: 0.375rem;
+$custom-control-indicator-checked-bg: rgb(85, 85, 85);
+$custom-control-indicator-focus-border-color: rgb(85, 85, 85);
+$custom-control-indicator-focus-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.75);
+$custom-control-indicator-border-color: rgba(0, 0, 0, 0.4);
+$form-feedback-font-size: 90%;
+$tooltip-bg: $grey;
+$tooltip-color: black;
+$tooltip-arrow-color: $grey;
+
+
+// СВОИ ПЕРЕМЕННЫЕ
+
+//цвета
+// темный главный цвет
+$primary-darken: darken($primary, 15%);
+//светлый главный цвет
+$primary-lighten-bg: lighten($primary,48%);
+//главный цвет при наведении
+$primary-hover: $primary-darken;
+
+//хедер
+//время анимации
+//в зависимости от размера экрана, подставляется одна из 3 переменных
+$animation-time-lg: 0.7s;
+$animation-time-md: 0.5s;
+$animation-time-sm: 0.3s;
+
+//прозрачность
+//прозрачность при наведении
+$opacity-hover: 0.8;
+
+//масштабирование
+//увеличение при наведении
+$scale-hover: scale(1.2);
+
+//кнопка
+$btn-box-shadow: 0px 6px 5px 0px rgba(30, 93, 39, 0.22);
+
+//текст
+$text-color-grey: rgb(66, 66, 66);
+
+//ссылка
+
+//модальное окно
+
+//форма
+
+//медиа запросы
+//ширина окна
+$screen-width-lg: 1199px;
+$screen-width-md: 991px;
+$screen-width-sm: 767px;
+$screen-width-xs: 575px;
+
+
+// jquery-ui-slider
+$ui-slider-border-radius: 0;
+$ui-slider-background-color: #fff;
+$ui-slider-border-color: #ced4da;
+$ui-slider-handle-border-radius: 50%;
+$ui-slider-handle-border-color: $primary;
+$ui-slider-handle-background-color: $primary;
+$ui-slider-handle-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.75);
+$ui-slider-handle-width: 1rem;
+$ui-slider-handle-height: 1rem;
+$ui-slider-handle-hover-color: darken($primary, 5%);
+$ui-slider-header-background-color: #5d6a7e;
+$ui-slider-horizontal-height: 0.25rem;

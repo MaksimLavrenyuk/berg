@@ -1,0 +1,9 @@
+.form {
+	&__footer {
+		display: flex;
+		align-items: center;
+	}
+	.form-hint {
+		display: none;
+	}
+}

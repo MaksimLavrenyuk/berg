@@ -1,0 +1,34 @@
+//ШРИФТЫ
+@import "fonts/fonts";
+
+
+//ИКОНКИ
+@import "icons/icons";
+
+
+//ОБЩИЕ СТИЛИ ВСЕХ СТРАНИЦ
+
+//типографика
+@import "typography/typography";
+
+//БЛОКИ 
+// футер
+@import "blocks/footer/footer";
+// хедер
+@import "blocks/header/header";
+// форма
+@import "blocks/form/form";
+// checkbox форм
+@import "blocks/form-check/form-check";
+
+
+// УТИЛИТЫ
+// пространство
+@import "utilities/utilities";
+
+// jquery-ui
+@import "jquery-ui/jquery-ui";
+
+// СТРАНИЦЫ
+// главная
+@import "pages/index/index";

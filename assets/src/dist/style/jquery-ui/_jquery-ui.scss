@@ -1,0 +1,90 @@
+.ui-front {
+    z-index: 1100;
+}
+.ui-widget {
+    font-family: $font-family-base;
+}
+
+.ui-menu {
+    border: 1px solid $input-focus-border-color;
+    border-top: none;
+
+    &:hover {
+        top: 0;
+    }
+
+    .ui-menu-item {
+        background-color: white;
+        list-style: none;
+        font-size: 0.75rem;
+
+        &:first-child {
+            border-top-color: transparent;
+        }
+    }
+
+    .ui-menu-item-wrapper {
+        padding: .4375rem .75rem;
+    }
+
+    .ui-state-focus,
+    .ui-state-active {
+        margin: 0;
+    }
+}
+.ui-selectmenu-menu .ui-menu {
+	padding-bottom: 0;
+}
+
+.ui-selectmenu-menu .ui-menu .ui-selectmenu-optgroup {
+	font-size: 0.875rem;
+}
+
+.ui-button.ui-state-active:hover,
+.ui-button:active,
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active,
+a.ui-button:active {
+	border-width: 0;
+}
+.jq-ui-slider {
+    border-radius: $ui-slider-border-radius;
+    background-color: $ui-slider-background-color;
+
+    &.ui-widget-content {
+        border-color: $ui-slider-border-color;
+    }
+
+    .ui-slider-handle {
+        border-radius: $ui-slider-handle-border-radius;
+        border-color: $ui-slider-handle-border-color;
+        background-color: $ui-slider-handle-background-color;
+        box-shadow: $ui-slider-handle-box-shadow;
+        width: $ui-slider-handle-width;
+        height: $ui-slider-handle-height;
+        cursor: pointer;
+
+        &:focus {
+            outline: none;
+        }
+
+        &:hover,
+        &:focus {
+            background-color: $ui-slider-handle-hover-color;
+            border-color: $ui-slider-handle-hover-color;
+        }
+    }
+
+    .ui-widget-header {
+        background-color: $ui-slider-header-background-color;
+    }
+
+    &.ui-slider-horizontal {
+        height: $ui-slider-horizontal-height;
+
+        .ui-slider-handle {
+            top: -0.6em;
+        }
+    }
+}

@@ -1,0 +1,7 @@
+.form-check {
+	.custom-control-label {
+		&::before {
+			border-radius: 3px;
+		}
+	}
+}
