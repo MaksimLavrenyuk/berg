@@ -1,7 +1,5 @@
 $(document).ready(function() {
 
-	// маска на телефон
-    $('[type="tel"]').mask("+7 (999) 999-99-99");
 
     // функция давление в кеш браузера прелоудера
     function preloadImages(array) {
@@ -24,3 +22,13 @@ $(document).ready(function() {
 
 	preloadImages(["dist/img/preloader-circular.svg"]);
 });
+
+
+// Импортируем карту
+//= map/map.js
+
+// Импортируем поиск по городам
+//= search-city/search-city.js
+
+// Импортируем поиск товара
+//= search-product/search-product.js

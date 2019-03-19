@@ -1,7 +1,10 @@
 .form-check {
+	padding-top: 0.75rem;
+	padding-bottom: 0.75rem;
+	border-bottom: 1px solid $gray-400;
 	.custom-control-label {
 		&::before {
-			border-radius: 3px;
+			border-radius: 0px;
 		}
 	}
 }

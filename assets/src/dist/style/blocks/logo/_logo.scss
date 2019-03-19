@@ -1,0 +1,17 @@
+.logo {
+	display: block;
+	text-align:center;
+	font-weight:bold;
+	color: white;
+	font-size: 1.625rem;
+	background:#3e311f;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	transition: $animation-time-sm;
+	&:hover,
+	&:focus {
+		text-decoration: none;
+		color: white;
+		opacity: 0.9;
+	}
+}
