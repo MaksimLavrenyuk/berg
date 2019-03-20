@@ -1,87 +1,128 @@
 $(document).ready(function() {
+	var overlay =  $('#map-overlay');
+	var contentBox =  $('.content__main_type_map');
+	
 	$('#map-search').submit(function(e) {
+		e.preventDefault();
+		var checkedNum = $('#map-search input[type="checkbox"]:checked').length;
+		if (!checkedNum) {
+			if (!$("div").is('#map-overlay')) {
+		        overlay.appendTo(contentBox);
+		    };
+		    //закрытие меню дополнительной информации
+		    if ($('.aside-info').hasClass('aside-info_type_open')) {
+		        asideInfoOpen ();
+		    };
+			overlay.text('товарные группы не выбраны');
+		} else {
+			var submit = $("[type=submit]", this);
+		    var width = $("[type=submit]", this).css("width");
+		    var url = $(this).attr('action');
 
-        e.preventDefault();
-	    var submit = $("[type=submit]", this);
-	    var width = $("[type=submit]", this).css("width");
-	    var url = $(this).attr('action');
+		    $.ajax({
+		        beforeSend: $.proxy(function() {
+		            $(this).find('input').prop('disabled', true);
+		            submit.prop('disabled', true);
+		            submit.html("");
+		            submit.css('min-width', '' + width + '');
+		            $('<img class="preloader" src="dist/img/preloader-circular.svg" alt="preloader">').appendTo(submit);
+		        }, this),
+		        url: url,
+		        type: 'post',
+		        data: $(this).serialize(),
+		        dataType: 'json',
+		        success: $.proxy(function(data) {
+		            $(this).find('input').prop('disabled', false);
+		            submit.html("");
+		            submit.css('min-width', 'none');
+		            submit.html("Найти");
+		            submit.prop('disabled', false);
 
-	    $.ajax({
-	        beforeSend: $.proxy(function() {
-	            $(this).find('input').prop('disabled', true);
-	            submit.prop('disabled', true);
-	            submit.html("");
-	            submit.css('min-width', '' + width + '');
-	            $('<img class="preloader" src="dist/img/preloader-circular.svg" alt="preloader">').appendTo(submit);
-	        }, this),
-	        url: url,
-	        type: 'post',
-	        data: $(this).serialize(),
-	        dataType: 'json',
-	        success: $.proxy(function(data) {
-	            $(this).find('input').prop('disabled', false);
-	            submit.html("");
-	            submit.css('min-width', 'none');
-	            submit.html("Найти");
-	            submit.prop('disabled', false);
+		            console.log(data.status);
+		            if (data.status === 'error') {
+		            	if (!$("div").is('#map-overlay')) {
+					        overlay.appendTo(contentBox);
+					    };
 
-	 			var factoryList = [ {factoryName: 'Завод №1', factoryСoordinates: '54.817224, 38.371901'}, { factoryName: 'Завод №2', factoryСoordinates: '55.034718, 40.927513'} ];
+		            	overlay.text(data.msg);
 
-	            // добавление метки города
-	            ymaps.geocode(data.CityName, {
-	            /**
-	             * Опции запроса
-	             * @see https://api.yandex.ru/maps/doc/jsapi/2.1/ref/reference/geocode.xml
-	             */
-	            // Сортировка результатов от центра окна карты.
-	            // boundedBy: myMap.getBounds(),
-	            // strictBounds: true,
-	            // Вместе с опцией boundedBy будет искать строго внутри области, указанной в boundedBy.
-	            // Если нужен только один результат, экономим трафик пользователей.
-	            results: 1
-		        }).then(function(res) {
-		            // Выбираем первый результат геокодирования.
-		            var firstGeoObject = res.geoObjects.get(0),
-		                // Координаты геообъекта.
-		                coords = firstGeoObject.geometry.getCoordinates(),
-		                // Область видимости геообъекта.
-		                bounds = firstGeoObject.properties.get('boundedBy');
+		            	if ($('.aside-info').hasClass('aside-info_type_open')) {
+		        			asideInfoOpen ();
+		    			};
+		            } else {
 
-		            firstGeoObject.options.set('preset', 'islands#darkBlueDotIconWithCaption');
-		            // Получаем строку с адресом и выводим в иконке геообъекта.
-		            firstGeoObject.properties.set('iconCaption', firstGeoObject.getAddressLine());
+			            if ($("div").is('#map-overlay')) {
+			            	overlay.detach();
+			            };
+					
+			            $('.aside-info__content').children().remove();
 
-		            // Добавляем первый найденный геообъект на карту.
-		            myMap.geoObjects.add(firstGeoObject);
-		            // Масштабируем карту на область видимости геообъекта.
-		            myMap.setBounds(bounds, {
-		                // Проверяем наличие тайлов на данном масштабе.
-		                checkZoomRange: true
-		            });       
-		        });
-		        var FactoryCoords = [];
+			            var factoryCounter = 0;
+			            var wayKm = 0;
+			            var priceKm = data.priceKm;
+			            var priceWay = 0;
 
-		        for (var i = 0, l = factoryList.length; i < l; i++) {
-		        	var coordinate = factoryList[i].factoryСoordinates.split(', ');
-		        	FactoryCoords.push(coordinate);
-		        };
+			            for (var i = 0, l = data.factoryList.length; i < l; i++) {
+			            	ymaps.route([ data.CityName, { type: 'wayPoint', point: data.factoryList[i].factoryСoordinates.split(', ') }], 
+								{
+									mapStateAutoApply: false
 
-		        console.log(FactoryCoords);
-		     
-		        FactoryCollection = new ymaps.GeoObjectCollection(null, {
-			        preset: 'islands#yellowIcon'
-			    });
+							    }).then(function (route) {
+								    var points = route.getWayPoints(),
+								    	lastPoint = points.getLength() - 1;
+								    points.options.set('preset', 'islands#redStretchyIcon');
+								    points.get(0).properties.set('iconContent', 'Точка доставки: '+data.CityName+'');
+								    points.get(lastPoint).properties.set('iconContent', 'В наличии: '+data.factoryList[factoryCounter].factoryName+'');
+								    
 
-			    for (var i = 0, l = FactoryCoords.length; i < l; i++) {
-			        FactoryCollection.add(new ymaps.Placemark(FactoryCoords[i]));
-			    };
-			    myMap.geoObjects.add(FactoryCollection);
 
-	        }, this),
-	        error: function(data) {
-	            alert('Ошибка при отправке данных на сервер');
-	        }
-	    });
+								// добавляем маршрут на карту
+								myMap.geoObjects.add(route);
+
+								wayKm = route.getLength();
+								wayKm  = wayKm / 1000;
+								wayKm = Math.round(wayKm * 100) / 100;
+
+								priceWay = wayKm * priceKm;
+								priceWay = Math.round(priceWay * 100) / 100;
+
+								if ($('.aside-info__content').children().length = 0) {
+
+								}
+								var listItm = $('<ul class="product-info__list"></ul>');
+
+								for (var j = 0, k = data.factoryList[factoryCounter].productStockName.length; j < k; j++) {
+									$('<li class="product-info__itm">'+data.factoryList[factoryCounter].productStockName[j]+'</li>').appendTo(listItm);
+								};
+
+								listItm = listItm.prop('outerHTML');
+
+
+								$('<div class="product-info">' + 
+						            '<h5 class="product-info__title">'+data.factoryList[factoryCounter].factoryName+'</h5>' + 
+					                '<h6 class="product-info__caption">Имеющиеся товары:</h6>' + 
+					                listItm +
+					                '<span class="product-info__text">Расстояние до адреса доставки: <span class="product-info__way">'+wayKm+'</span> км.</span>' +
+					                '<br>' +
+					                '<span class="product-info__text">Стоимость доставки: <span class="product-info__price">'+priceWay+'</span> руб.</span>' +
+			        			'</div>').appendTo('.aside-info__content');
+
+			        			factoryCounter++;
+							});
+				        };
+
+						//открытие меню дополнительной информации
+			           	if (!$('.aside-info').hasClass('aside-info_type_open')) {
+			           		asideInfoOpen ();
+			           	};
+		            };
+
+		        }, this),
+		        error: function(data) {
+		            alert('Ошибка при отправке данных на сервер');
+		        }
+		    });
+		};
 
     });
 });

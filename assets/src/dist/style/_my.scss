@@ -28,7 +28,10 @@
 @import "blocks/form/form";
 // checkbox форм
 @import "blocks/form-check/form-check";
-
+// боковая панель с дополнительной информацией
+@import "blocks/aside-info/aside-info";
+// информация о товарах
+@import "blocks/product-info/product-info";
 
 // УТИЛИТЫ
 // пространство
@@ -40,3 +43,8 @@
 // СТРАНИЦЫ
 // главная
 @import "pages/index/index";
+
+
+body {
+	overflow: hidden;
+}

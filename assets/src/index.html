@@ -53,6 +53,7 @@
     <div class="content">
         <div class="content__aside">
             <form id="map-search" name="mapSearch" method="post" action="dist/server/map-search.php" class="form search">
+                <label for="cityes-search-input">Поиск города:</label>
                 <input name="city" id="cityes-search-input" class="form-control search__input mb-4" type="search" placeholder="Поиск по городам" aria-label="Search">
                 <div class="form-check">
                     <input name="product-1" class="custom-control-input" type="checkbox" id="product-1">
@@ -208,7 +209,19 @@
             </form>
         </div>
         <div class="content__main content__main_type_map">
+            <div id="map-overlay" class="map-overlay">Пожалуйста, выберите город и товарную группу</div>
             <div id="map" class="map"></div>
+        </div>
+    </div>
+    <div class="aside-info">
+        <div class="aside-info__header">
+            <h5 class="aside-info__title" id="modalRegionLabel">Информация о наличии товаров</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="aside-info__content">
+
         </div>
     </div>
     <script src="dist/js/main.js"></script>

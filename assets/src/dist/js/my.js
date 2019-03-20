@@ -32,3 +32,6 @@ $(document).ready(function() {
 
 // Импортируем поиск товара
 //= search-product/search-product.js
+
+// Импортируем боковое информационное меню
+//= aside-info/aside-info.js
