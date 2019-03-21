@@ -1,0 +1,13 @@
+.page-nav {
+	display: flex;
+	flex-direction: column;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	&__link {
+		display: block;
+		padding-top: .75rem;
+	    padding-bottom: .75rem;
+	    border-bottom: 1px solid $gray-200;
+	}
+}

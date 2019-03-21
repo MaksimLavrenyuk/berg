@@ -3,5 +3,22 @@
 	border-bottom: 1px solid $gray-200;
 }
 
+.header-nav {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	display: flex;
+	&__itm {
+		border-bottom: 2px solid transparent;
+		&_type_active {
+			border-color: #3e311f;
+		}
+	}
+	&__link {
+		display: inline-block;
+		padding: 0.25rem 1rem;
+	}
+}
+
 
 @import "header-mediaqueries";

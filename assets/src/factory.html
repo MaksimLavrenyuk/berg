@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-100">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Заводы - АЛЬТЕРНАТИВА СВД</title>
+    <link rel="stylesheet" href="dist/css/main.css">
+    <script src="dist/js/critical.js"></script>
+</head>
+
+<body class="d-flex flex-column h-100">
+    <!--Импортируем header-->
+    //= dist/template/header/header.html
+    <!--/Импортируем header-->
+    <div class="content">
+        <div class="content__aside">
+            <ul class="page-nav">
+                <li class="page-nav__itm page-nav__itm_type_active">
+                    <span class="page-nav__link">Список заводов</span>
+                </li>
+                <li class="page-nav__itm page-nav__itm_type_active">
+                    <a href="#" class="page-nav__link">Заводы на карте</a>
+                </li>
+            </ul>
+        </div>
+        <div class="content__main">
+            <div class="page">
+                <div class="page__header">
+                    <h1>АЛЬТЕРНАТИВА СВД</h1>
+                    <ul class="page-factory-info">
+                        <li class="page-factory-info__itm">
+                            <h5 class="page-factory-info__caption">Адрес:</h5>
+                            <a class="page-factory-info__text">Ярославль, Россия, 1-й Промышленный проезд, 14</a>
+                        </li>
+                        <li class="page-factory-info__itm">
+                            <h5 class="page-factory-info__caption">Контакты:</h5>
+                            <ul class="page-factory-info__contacts">
+                                <li>
+                                    <a href="mailro:mail@mail.com">mail@mail.com</a>
+                                </li>
+                                <li>
+                                    <a href="tel:+79511040300">+79511040300</a>
+                                </li>
+                                <li>
+                                    <a href="tel:+79511050301">+79511050301</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <h2>Товарные группы</h2>
+                    <button type="button" class="js-add-product btn btn-primary mt-4">Добавить товарные группы</button>
+                    <form name="addProduct" method="post" action="dist/server/add-product.php" class="form product-add-form">
+                        <div class="form-group">
+                            <label for="productName">Название товара</label>
+                            <input type="text" class="form-control" id="productName" placeholder="Введите название товара">
+                          </div>
+                    </form>
+                    <div class="table-responsive mt-5">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Название</th>
+                                    <th scope="col">Артикул</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>3БФ24</td>
+                                    <td>1234</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>3БФ30</td>
+                                    <td>11223344</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>3БФ40-2</td>
+                                    <td>4321</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>3БФ45-5</td>
+                                    <td>11111111</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>3БФ24</td>
+                                    <td>1234</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>3БФ30</td>
+                                    <td>11223344</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>3БФ40-2</td>
+                                    <td>4321</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>3БФ45-5</td>
+                                    <td>11111111</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>3БФ24</td>
+                                    <td>1234</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>3БФ30</td>
+                                    <td>11223344</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>3БФ40-2</td>
+                                    <td>4321</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>3БФ45-5</td>
+                                    <td>11111111</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>3БФ24</td>
+                                    <td>1234</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>3БФ30</td>
+                                    <td>11223344</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>3БФ40-2</td>
+                                    <td>4321</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>3БФ45-5</td>
+                                    <td>11111111</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="dist/js/main.js"></script>
+</body>
+
+</html>

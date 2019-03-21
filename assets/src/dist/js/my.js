@@ -35,3 +35,6 @@ $(document).ready(function() {
 
 // Импортируем боковое информационное меню
 //= aside-info/aside-info.js
+
+// Импортируем добавление товарной группы
+//= add-product/add-product.js

@@ -1,0 +1,13 @@
+
+.table-hover tr {
+	cursor: pointer;
+}
+.table {
+	thead {
+		background-color: #3e311f;
+		color: white;
+		th {
+   			 border-bottom: 1px solid $table-border-color;
+  		}
+	}
+}
