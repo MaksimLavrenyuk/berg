@@ -5,236 +5,38 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Берг</title>
+    <title>Вход</title>
     <link rel="stylesheet" href="dist/css/main.css">
     <script src="dist/js/critical.js"></script>
-    <script>
-        // Массив с названием городов
-        var availableTags = [
-            "Москва",
-            "Санкт-Петербург",
-            "Волгоград",
-            "Воронеж",
-            "Екатеринбург",
-            "Казань",
-            "Калуга",
-            "Краснодар",
-            "Нижний Новгород",
-            "Новосибирск",
-            "Ростов-на-Дону",
-            "Самара",
-            "Саратов",
-            "Сочи",
-            "Уфа",
-            "Ярославль",
-            "Киев",
-            "Днепр",
-            "Донецк",
-            "Запорожье",
-            "Кривой рог",
-            "Львов",
-            "Одесса",
-            "Харьков",
-            "Минск",
-            "Брест",
-            "Витебск",
-            "Гомель",
-            "Гродно",
-            "Могилев",
-            "Ташкент",
-        ];
-    </script>
 </head>
 
 <body class="d-flex flex-column h-100">
-    <!--Импортируем header-->
-    //= dist/template/header/header.html
-    <!--/Импортируем header-->
-    <div class="content">
-        <div class="content__aside">
-            <form id="map-search" name="mapSearch" method="post" action="dist/server/map-search.php" class="form search">
-                <label for="cityes-search-input">Поиск города:</label>
-                <input name="city" id="cityes-search-input" class="form-control search__input mb-4" type="search" placeholder="Поиск по городам" aria-label="Search">
-                <div class="form-check">
-                    <input name="product-1" class="custom-control-input" type="checkbox" id="product-1">
-                    <label class="custom-control-label" for="product-1">
-                        Товарная группа №1
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input name="product-2" class="custom-control-input" type="checkbox" id="product-2">
-                    <label class="custom-control-label" for="product-2">
-                        Товарная группа №2
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input name="product-3" class="custom-control-input" type="checkbox" id="product-3">
-                    <label class="custom-control-label" for="product-3">
-                        Товарная группа №3
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input name="product-4" class="custom-control-input" type="checkbox" id="product-4">
-                    <label class="custom-control-label" for="product-4">
-                        Товарная группа №4
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input name="product-5" class="custom-control-input" type="checkbox" id="product-5">
-                    <label class="custom-control-label" for="product-5">
-                        Товарная группа №5
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input name="product-6" class="custom-control-input" type="checkbox" id="product-6">
-                    <label class="custom-control-label" for="product-6">
-                        Товарная группа №6
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input name="product-7" class="custom-control-input" type="checkbox" id="product-7">
-                    <label class="custom-control-label" for="product-7">
-                        Товарная группа №7
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input name="product-8" class="custom-control-input" type="checkbox" id="product-8">
-                    <label class="custom-control-label" for="product-8">
-                        Товарная группа №8
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input name="product-9" class="custom-control-input" type="checkbox" id="product-9">
-                    <label class="custom-control-label" for="product-9">
-                        Товарная группа №9
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input name="product-10" class="custom-control-input" type="checkbox" id="product-10">
-                    <label class="custom-control-label" for="product-10">
-                        Товарная группа №10
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input name="product-11" class="custom-control-input" type="checkbox" id="product-11">
-                    <label class="custom-control-label" for="product-11">
-                        Товарная группа №11
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input name="product-12" class="custom-control-input" type="checkbox" id="product-12">
-                    <label class="custom-control-label" for="product-12">
-                        Товарная группа №12
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input name="product-13" class="custom-control-input" type="checkbox" id="product-13">
-                    <label class="custom-control-label" for="product-13">
-                        Товарная группа №13
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input name="product-14" class="custom-control-input" type="checkbox" id="product-14">
-                    <label class="custom-control-label" for="product-14">
-                        Товарная группа №14
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input name="product-15" class="custom-control-input" type="checkbox" id="product-15">
-                    <label class="custom-control-label" for="product-15">
-                        Товарная группа №15
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input name="product-16" class="custom-control-input" type="checkbox" id="product-16">
-                    <label class="custom-control-label" for="product-16">
-                        Товарная группа №16
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input name="product-17" class="custom-control-input" type="checkbox" id="product-17">
-                    <label class="custom-control-label" for="product-17">
-                        Товарная группа №17
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input name="product-18" class="custom-control-input" type="checkbox" id="product-18">
-                    <label class="custom-control-label" for="product-18">
-                        Товарная группа №18
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input name="product-19" class="custom-control-input" type="checkbox" id="product-19">
-                    <label class="custom-control-label" for="product-19">
-                        Товарная группа №19
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input name="product-20" class="custom-control-input" type="checkbox" id="product-20">
-                    <label class="custom-control-label" for="product-20">
-                        Товарная группа №20
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input name="product-21" class="custom-control-input" type="checkbox" id="product-21">
-                    <label class="custom-control-label" for="product-21">
-                        Товарная группа №21
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input name="product-22" class="custom-control-input" type="checkbox" id="product-22">
-                    <label class="custom-control-label" for="product-22">
-                        Товарная группа №22
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input name="product-23" class="custom-control-input" type="checkbox" id="product-23">
-                    <label class="custom-control-label" for="product-23">
-                        Товарная группа №23
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input name="product-24" class="custom-control-input" type="checkbox" id="product-24">
-                    <label class="custom-control-label" for="product-24">
-                        Товарная группа №24
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input name="product-25" class="custom-control-input" type="checkbox" id="product-25">
-                    <label class="custom-control-label" for="product-25">
-                        Товарная группа №25
-                    </label>
-                </div>
-                <button type="submit" class="btn btn-primary mt-5">Найти</button>
-            </form>
-        </div>
-        <div class="content__main content__main_type_map">
-            <div id="map-overlay" class="map-overlay">Пожалуйста, выберите город и товарную группу</div>
-            <div id="map" class="map"></div>
-        </div>
-    </div>
-    <div class="aside-info">
-        <div class="aside-info__header">
-            <h5 class="aside-info__title" id="modalRegionLabel">Информация о наличии товаров</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="aside-info__content">
-
+    <div class="container my-auto">
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <form name="signInForm" id="signInForm" method="post" action="dist/server/signIn.php" class="form form_needs-validation" autocomplete="true">
+                    <h1>Вход в систему</h1>
+                    <input name="consultationFeedback" type="hidden">
+                    <div class="form-group">
+                        <label for="signIn-Email">E-mail</label>
+                        <input name="email" type="email" class="form-control" id="signIn-Email" placeholder="Ваш e-mail *" required  autocomplete="username">
+                        <div class="valid-message"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="signIn-password">Пароль</label>
+                        <div class="password-box">
+                            <input name="password" type="password" class="form-control password-box__input" id="signIn-password"  required autocomplete="current-password">
+                            <button type="button" class="password-box__btn"></button>
+                        </div>
+                        <div class="valid-message"></div>
+                    </div>
+                    <small class="form-text text-muted mb-2"><a href="#">Забыли пароль?</a></small>
+                    <button type="submit" class="btn btn-success mt-4" disabled>Войти</button>
+                </form>
+            </div>
         </div>
     </div>
     <script src="dist/js/main.js"></script>
-    <script src="https://api-maps.yandex.ru/2.1/?apikey=fd9a221e-d6d7-41f0-aaf6-ed3c458a2caa&lang=ru_RU" type="text/javascript">
-    </script>
-    <script type="text/javascript">
-    // Функция ymaps.ready() будет вызвана, когда
-    // загрузятся все компоненты API, а также когда будет готово DOM-дерево.
-    ymaps.ready(init);
-     $("#cityes-search-input").autocomplete({
-        source: availableTags
-    });
-    </script>
 </body>
 
 </html>

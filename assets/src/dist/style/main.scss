@@ -26,7 +26,10 @@
 @import "../../../../node_modules/bootstrap/scss/tooltip";
 // таблицы
 @import "../../../../node_modules/bootstrap/scss/tables";
-
+// тосты
+@import "../../../../node_modules/bootstrap/scss/toasts";
+// модальное окно
+@import "../../../../node_modules/bootstrap/scss/modal";
 
 // CSS Для jquery-ui (после иниализации перевести в .scss)
 @import "../../../../node_modules/jquery-ui/themes/base/core";

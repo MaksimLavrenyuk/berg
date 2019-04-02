@@ -1,0 +1,12 @@
+.tonnage-form {
+	&__content {
+		.form-group {
+			padding-bottom: 0.5rem;
+			margin-bottom: 2rem;
+			border-bottom: 1px solid $gray-200;
+			&:last-child {
+			}
+
+		}
+	}
+}

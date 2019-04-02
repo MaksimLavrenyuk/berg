@@ -40,6 +40,13 @@
 @import "blocks/page-factory-info/page-factory-info";
 // таблицы
 @import "blocks/table/table";
+// список заводов на карте
+@import "blocks/factory-map-list/factory-map-list";
+// форма тоннажа
+@import "blocks/tonnage-form/tonnage-form";
+// пароль
+@import "blocks/password/password";
+
 
 // УТИЛИТЫ
 // пространство
@@ -56,3 +63,7 @@
 body {
 	overflow: hidden;
 }
+
+.modal-header {
+  	align-items: center;
+ }

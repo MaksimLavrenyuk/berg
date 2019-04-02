@@ -1,6 +1,7 @@
 $(document).ready(function() {
-    $('.js-add-product').submit(function(e) {
-        e.preventDefault();
+
+    $('#add-factory-form').submit(function(e) {
+    	e.preventDefault();
         var submit = $("[type=submit]", this);
         var width = $("[type=submit]", this).css("width");
         var url = $(this).attr('action');
@@ -21,15 +22,29 @@ $(document).ready(function() {
             success: $.proxy(function(data) {
 
             	if (data.msg == "Добавлен") {
-            		var productNumber = $('#product-groups-table tbody tr').last().find('td').first().text();
-            		productNumber = +productNumber + 1;
+            		$('.factory-link-title').remove();
+            		$('.factory-link').remove();
+            		jQuery('<h5/>', {class: 'mt-4 factory-link-title', text: 'Ссылка на страницу с заводом:'}).appendTo('#modal-add-factory .modal-body');
+            		jQuery('<a/>', {class: 'd-inline-block mt-2 factory-link',  href: ''+data.factoryLink+'', text: ''+data.factoryName+''}).appendTo('#modal-add-factory .modal-body');
+
+            		var factoryNumber = $('#plants-table tbody tr').last().find('td').first().text();
+            		factoryNumber = +factoryNumber + 1;
+            		
+            		var factoryContactsUl = '';
+
+            		for (var j = 0, k = data.factoryContacts.length; j < k; j++) {
+							factoryContactsUl = factoryContactsUl + '<li>'+ data.factoryContacts[j]+'</li>';
+					};
+
             		$(
             			'<tr>' +
-                            '<td>'+productNumber+'</td>' +
-                            '<td>'+data.productGroupName+'</td>' +
+                            '<td>'+factoryNumber+'</td>' +
+                            '<td>'+data.factoryName+'</td>' +
+                            '<td>'+data.factoryAddress+'</td>' +
+                            '<td>'+data.factorySite+'</td>' +
+                            '<td><ul>'+factoryContactsUl+'</ul></td>' +
                     	'</tr>'
-                    ).appendTo('#product-groups-table tbody');
-
+                    ).appendTo('#plants-table tbody');
 
             		//поведение кнопок
 	                $(this).find('input').prop('disabled', false);
@@ -38,7 +53,7 @@ $(document).ready(function() {
 	                submit.css('min-width', 'none');
 	                submit.html(btnText);
 	                submit.prop('disabled', false);
-	                $('.toast-body').text('Группа добавлена');
+	                $('.toast-body').text('Завод добавлен');
 	                $('.toast').toast('show');
             	};
 

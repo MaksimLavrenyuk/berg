@@ -1,4 +1,5 @@
 var myMap;
+
 function init() {
     // Создание карты.    
     myMap = new ymaps.Map("map", {
@@ -12,4 +13,5 @@ function init() {
         // от 0 (весь мир) до 19.
         zoom: 7
     });
+
 };

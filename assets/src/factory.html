@@ -18,134 +18,126 @@
         <div class="content__aside">
             <ul class="page-nav">
                 <li class="page-nav__itm page-nav__itm_type_active">
-                    <span class="page-nav__link">Список заводов</span>
+                    <span class="page-nav__link">Заводы</span>
                 </li>
-                <li class="page-nav__itm page-nav__itm_type_active">
-                    <a href="#" class="page-nav__link">Заводы на карте</a>
+                <li class="page-nav__itm">
+                    <a href="#" class="page-nav__link">Тарифная сетка</a>
+                </li>
+                <li class="page-nav__itm">
+                    <a href="#" class="page-nav__link">Товарные группы</a>
+                </li>
+                <li class="page-nav__itm">
+                    <a href="#" class="page-nav__link">Профиль</a>
                 </li>
             </ul>
         </div>
         <div class="content__main">
             <div class="page">
                 <div class="page__header">
-                    <h1>АЛЬТЕРНАТИВА СВД</h1>
+                    <h1 id="h1-factory-name" class="mb-5">АЛЬТЕРНАТИВА СВД</h1>
+                    <h2>Общаяя информация</h2>
                     <ul class="page-factory-info">
                         <li class="page-factory-info__itm">
                             <h5 class="page-factory-info__caption">Адрес:</h5>
-                            <a class="page-factory-info__text">Ярославль, Россия, 1-й Промышленный проезд, 14</a>
+                            <span class="page-factory-info__text page-factory-info__text_address">Ярославль, Россия, 1-й Промышленный проезд, 14</span>
+                        </li>
+                        <li class="page-factory-info__itm">
+                            <h5 class="page-factory-info__caption">Сайт:</h5>
+                            <a href="http://xn-----7kcabgbgn6aq0cejla2afiuf2q.xn--p1ai/" class="page-factory-info__text page-factory-info__text_site">http://xn-----7kcabgbgn6aq0cejla2afiuf2q.xn--p1ai/</a>
                         </li>
                         <li class="page-factory-info__itm">
                             <h5 class="page-factory-info__caption">Контакты:</h5>
                             <ul class="page-factory-info__contacts">
                                 <li>
-                                    <a href="mailro:mail@mail.com">mail@mail.com</a>
+                                    <span>mail@mail.com</span>
                                 </li>
                                 <li>
-                                    <a href="tel:+79511040300">+79511040300</a>
+                                    <span>+79511040300</span>
                                 </li>
                                 <li>
-                                    <a href="tel:+79511050301">+79511050301</a>
+                                    <span>+79511050301</span>
                                 </li>
                             </ul>
                         </li>
                     </ul>
+                    <div class="accordion" id="accordionInfo">
+                        <div class="d-flex">
+                            <!--<button type="button" data-toggle="collapse" data-target="#factory-add-info" aria-expanded="false" aria-controls="factory-add-info" class="btn btn-info mt-4 mb-5 mr-3">Добавить информацию</button>-->
+                            <button type="button" data-toggle="collapse" data-target="#factory-change-info" aria-expanded="false" aria-controls="factory-change-info" class="btn btn-info mt-4 mb-5">Изменить информацию</button>
+                        </div>
+                        <!--
+                        <form id="factory-add-info" name="factoryAddInfo" method="post" action="dist/server/factory-info.php" class="form mb-5 collapse" data-parent="#accordionInfo">
+                            <h3>Добавить информацию</h3>
+                            <div class="form-group">
+                                <label for="factoryAddCaption">Заголовок</label>
+                                <input name="factoryAddCaption" type="text" class="form-control" id="factoryAddCaption" placeholder="Введите заголовок для информационного блока">
+                            </div>
+                            <div class="form-group">
+                                <label for="factoryAddInput">Информация</label>
+                                <input name="factoryAddInput" type="text" class="form-control" id="factoryAddInput" placeholder="Введите информацию">
+                            </div>
+                            <button type="submit" class="btn btn-success">Добавить</button>
+                        </form>
+                        -->
+                        <form id="factory-change-info" name="factoryChangeInfo" method="post" action="dist/server/factory-info.php" class="form collapse mb-5" data-parent="#accordionInfo">
+                            <h3>Изменить информацию</h3>
+                            <div class="form-group">
+                                <label for="factory-name">Название</label>
+                                <input name="FactoryName" type="text" class="form-control" id="factory-name" value="АЛЬТЕРНАТИВА СВД" placeholder="Введите название завода" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="factory-address">Адрес</label>
+                                <input name="FactoryAddress" type="text" class="form-control" id="factory-address" value="Ярославль, Россия, 1-й Промышленный проезд, 14" placeholder="Введите адрес завода" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Контакты</label>
+                                <div id="factoryContactsInputs" class="input-box">
+                                    <input name="FactoryContact0" type="text" class="form-control mb-3" value="mail@mail.com" required>
+                                    <input name="FactoryContact1" type="text" class="form-control mb-3" value="+79511040300" required>
+                                    <input name="FactoryContact2" type="text" class="form-control mb-3" value="+79511050301" required>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-sm btn-danger mb-3 js-delete-input">Удалить поле</button>
+                                </div>
+                                <button type="button" class="btn btn-sm btn-info js-add-input mt-3">Добавить поле</button>
+                            </div>
+                            <div class="form-group">
+                                <label for="factory-site">Сайт</label>
+                                <input name="FactorySite" type="text" class="form-control" id="factory-site" value="http://xn-----7kcabgbgn6aq0cejla2afiuf2q.xn--p1ai/" placeholder="Введите сайт завода" required>
+                            </div>
+                            <button type="submit" class="btn btn-success">Изменить</button>
+                        </form>
+                    </div>
                     <h2>Товарные группы</h2>
-                    <button type="button" class="js-add-product btn btn-primary mt-4">Добавить товарные группы</button>
-                    <form name="addProduct" method="post" action="dist/server/add-product.php" class="form product-add-form">
-                        <div class="form-group">
-                            <label for="productName">Название товара</label>
-                            <input type="text" class="form-control" id="productName" placeholder="Введите название товара">
-                          </div>
-                    </form>
+                    <button type="button" class="btn btn-info mt-4"  data-toggle="modal" data-target="#modal-product-groups">Добавить товарные группы</button>
                     <div class="table-responsive mt-5">
-                        <table class="table">
+                        <table class="table" id="product-group-list-table">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Название</th>
-                                    <th scope="col">Артикул</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>1</td>
-                                    <td>3БФ24</td>
-                                    <td>1234</td>
+                                    <td>Товарная группа №1</td>
                                 </tr>
                                 <tr>
                                     <td>2</td>
-                                    <td>3БФ30</td>
-                                    <td>11223344</td>
+                                    <td>Товарная группа №2</td>
                                 </tr>
                                 <tr>
                                     <td>3</td>
-                                    <td>3БФ40-2</td>
-                                    <td>4321</td>
+                                    <td>Товарная группа №3</td>
                                 </tr>
                                 <tr>
                                     <td>4</td>
-                                    <td>3БФ45-5</td>
-                                    <td>11111111</td>
+                                    <td>Товарная группа №4</td>
                                 </tr>
                                 <tr>
-                                    <td>1</td>
-                                    <td>3БФ24</td>
-                                    <td>1234</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>3БФ30</td>
-                                    <td>11223344</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>3БФ40-2</td>
-                                    <td>4321</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>3БФ45-5</td>
-                                    <td>11111111</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>3БФ24</td>
-                                    <td>1234</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>3БФ30</td>
-                                    <td>11223344</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>3БФ40-2</td>
-                                    <td>4321</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>3БФ45-5</td>
-                                    <td>11111111</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>3БФ24</td>
-                                    <td>1234</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>3БФ30</td>
-                                    <td>11223344</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>3БФ40-2</td>
-                                    <td>4321</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>3БФ45-5</td>
-                                    <td>11111111</td>
+                                    <td>5</td>
+                                    <td>Товарная группа №5</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -154,6 +146,19 @@
             </div>
         </div>
     </div>
+    <div aria-live="polite" aria-atomic="true" style="position: fixed; min-height: 200px; top: 91px; right: 37px; min-width: 200px; z-index: 1051;">
+        <div class="toast fade" style="position: absolute; top: 0; right: 0;">
+            <div class="toast-header">
+                <strong class="toast-header__text mr-auto">Изменение данных</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+            </div>
+        </div>
+    </div>
+    //= dist/template/modal/modal-product-groups.html
     <script src="dist/js/main.js"></script>
 </body>
 

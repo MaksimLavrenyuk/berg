@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-100">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Берг</title>
+    <link rel="stylesheet" href="dist/css/main.css">
+    <script src="dist/js/critical.js"></script>
+</head>
+
+<body class="d-flex flex-column h-100">
+    <!--Импортируем header-->
+    //= dist/template/header/header.html
+    <!--/Импортируем header-->
+    <div class="content">
+        <div class="content__aside">
+            <div class="factory-map-list">
+                <button id="factories-0" type="button" class="btn btn-light factory-map-list__itm">АЛЬТЕРНАТИВА СВД</button>
+                <button id="factories-1" type="button" class="btn btn-light factory-map-list__itm">Пожарное оборудование НН</button>
+                <button id="factories-2" type="button" class="btn btn-light factory-map-list__itm">Металлоторг</button>
+                <button id="factories-3" type="button" class="btn btn-light factory-map-list__itm">Рязанский завод ЖБИ-6</button>
+            </div>
+        </div>
+        <div class="content__main content__main_type_map">
+            <div id="map" class="map"></div>
+        </div>
+    </div>
+    <div class="aside-info">
+        <div class="aside-info__header">
+            <h5 class="aside-info__title" id="modalRegionLabel">Информация о заводе</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="aside-info__content">
+        </div>
+    </div>
+    <script src="dist/js/main.js"></script>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=fd9a221e-d6d7-41f0-aaf6-ed3c458a2caa&lang=ru_RU" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+    // Функция ymaps.ready() будет вызвана, когда
+    // загрузятся все компоненты API, а также когда будет готово DOM-дерево.
+    $(document).ready(function() {
+        $.ajax({
+            url: 'dist/server/factory-on-map.php',
+            type: 'get',
+            dataType: 'json',
+            success: function(data) {
+                var myMap2;
+                var factoryData = data;
+
+                ymaps.ready(initAllPlants);
+
+                function initAllPlants() {
+                    // Создание карты.    
+                    myMap2 = new ymaps.Map("map", {
+                            // Координаты центра карты.
+                            // Порядок по умолчанию: «широта, долгота».
+                            // Чтобы не определять координаты центра карты вручную,
+                            // воспользуйтесь инструментом Определение координат.
+                            center: [55.76, 37.64],
+                            controls: [],
+                            // Уровень масштабирования. Допустимые значения:
+                            // от 0 (весь мир) до 19.
+                            zoom: 7
+                        }),
+                        visible = new ymaps.GeoObjectCollection(),
+                        factories = new ymaps.GeoObjectCollection({
+                            properties: {
+                                id: 'factories',
+                                name: 'Заводы'
+                            }
+                        });
+
+                    for (var i = 0, l = data.factoryList.length; i < l; i++) {
+                        factories.add(new ymaps.Placemark(data.factoryList[i].factoryСoordinates.split(', '), {
+                            id: 'factories-' + i,
+                            balloonContent: data.factoryList[i].factoryAddress,
+                            hintContent: data.factoryList[i].factoryAddress,
+                            iconCaption: data.factoryList[i].factoryName,
+                        }));
+                    };
+
+                    visible.add(factories);
+                    myMap2.geoObjects.add(visible);
+                    myMap2.margin.addArea({
+                            right: 700
+                     });
+
+                    myMap2.setBounds(myMap2.geoObjects.getBounds());
+
+
+                    $('.factory-map-list__itm').click(function() {
+                        $('.aside-info__content').children().remove();
+                        var idFactory = this.id;
+                        var idFactoryShort = idFactory.slice(10);
+                        var ProductlistItm = $('<ul class="product-info__list"></ul>');
+
+                        for (var j = 0, k = data.factoryList[idFactoryShort].productStockName.length; j < k; j++) {
+                            $('<li class="product-info__itm">' + data.factoryList[idFactoryShort].productStockName[j] + '</li>').appendTo(ProductlistItm);
+                        };
+
+                        ProductlistItm = ProductlistItm.prop('outerHTML');
+                        
+                        var factoryContacts;
+
+                        // формируем список контактов
+                        if (data.factoryList[idFactoryShort].factoryContacts != 0) {
+
+                            factoryContacts = $('<ul class="product-info-contacts"></ul>');
+
+                            for (var q = 0, w = data.factoryList[idFactoryShort].factoryContacts.length; q < w; q++) {
+
+                                var factoryContactsText = data.factoryList[idFactoryShort].factoryContacts[q];
+                                var factoryContactsLink;
+
+                                
+                                $('<li class="product-info-contacts__itm"><span>' + factoryContactsText + '</span></li>').appendTo(factoryContacts);
+                            };
+
+                            factoryContacts = factoryContacts.prop('outerHTML');
+                        };
+
+                        $('<div class="product-info" data-product-name="' + idFactory + '">' +
+                            '<h5 class="product-info__title">' + data.factoryList[idFactoryShort].factoryName + '</h5>' +
+                            '<h6 class="product-info__caption">Имеющиеся товары:</h6>' +
+                            ProductlistItm +
+                            '<h6 class="product-info__caption">Контакты:</h6>' +
+                            factoryContacts +
+                            '</div>').appendTo('.aside-info__content');
+
+                        if (!$('.aside-info').hasClass('aside-info_type_open')) {
+                            asideInfoOpen();
+                        };
+                        itemToggle(idFactory);
+                    });
+
+
+                    // Ищем нужную метку и открываем/закрываем ее балун.
+                    function itemToggle(id) {
+                        
+                            for (var n = 0, len = factories.getLength(); n < len; n++) {
+                                var placemark = factories.get(n);
+                                if (placemark.properties.get('id') === id) {
+                                    var placemarkCood = placemark.geometry.getCoordinates();
+                                    console.log(placemarkCood)
+                                    myMap2.setCenter(placemarkCood, 7, {
+                                        checkZoomRange: true,
+                                        useMapMargin: true
+                                    });
+                                    placemark.options.set('preset', 'islands#greenIcon');
+                                } else {
+                                    placemark.options.unset('preset');
+                                }
+
+                            }
+                        
+                    };
+                    factories.get(1).events.add('click', function () {
+                        myMap2.panTo(factories.get(1).geometry.getCoordinates(), {
+                            delay: 0,
+                            flying: 1,
+                            callback : function () {
+                                myMap2.openBalloon(myMap2.getCenter(), "Hello");
+                            }
+                        }); 
+                    });
+
+                };
+
+            },
+            error: function(data) {
+                alert('Ошибка при отправке данных на сервер');
+            }
+        });
+    });
+    </script>
+</body>
+
+</html>

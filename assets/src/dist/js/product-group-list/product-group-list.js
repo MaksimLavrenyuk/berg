@@ -1,12 +1,12 @@
 $(document).ready(function() {
-    $('.js-add-product').submit(function(e) {
-        e.preventDefault();
-        var submit = $("[type=submit]", this);
-        var width = $("[type=submit]", this).css("width");
-        var url = $(this).attr('action');
-        var btnText = $("[type=submit]", this).text();
+    $('#productGroupList').submit(function(e) {
+    	e.preventDefault();
+	    var submit = $("[type=submit]", this);
+	    var width = $("[type=submit]", this).css("width");
+	    var url = $(this).attr('action');
+	    var btnText = $("[type=submit]", this).text();
 
-        $.ajax({
+	    $.ajax({
             beforeSend: $.proxy(function() {
                 $(this).find('input').prop('disabled', true);
                 submit.prop('disabled', true);
@@ -21,15 +21,16 @@ $(document).ready(function() {
             success: $.proxy(function(data) {
 
             	if (data.msg == "Добавлен") {
-            		var productNumber = $('#product-groups-table tbody tr').last().find('td').first().text();
-            		productNumber = +productNumber + 1;
-            		$(
+            		$('#product-group-list-table tbody tr').remove();
+            		for (var i = 0, l = data.productGroupList.length; i < l; i++) {
+            			var ProductGroupCounter = i + 1;
+            			$(
             			'<tr>' +
-                            '<td>'+productNumber+'</td>' +
-                            '<td>'+data.productGroupName+'</td>' +
+                            '<td>'+ProductGroupCounter+'</td>' +
+                            '<td>'+data.productGroupList[i]+'</td>' +
                     	'</tr>'
-                    ).appendTo('#product-groups-table tbody');
-
+                    	).appendTo('#product-group-list-table tbody');
+            		};
 
             		//поведение кнопок
 	                $(this).find('input').prop('disabled', false);
@@ -38,7 +39,7 @@ $(document).ready(function() {
 	                submit.css('min-width', 'none');
 	                submit.html(btnText);
 	                submit.prop('disabled', false);
-	                $('.toast-body').text('Группа добавлена');
+	                $('.toast-body').text('Группы изменены');
 	                $('.toast').toast('show');
             	};
 
@@ -48,4 +49,4 @@ $(document).ready(function() {
             }
         });
     });
-});
+ });

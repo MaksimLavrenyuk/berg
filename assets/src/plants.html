@@ -18,10 +18,16 @@
         <div class="content__aside">
             <ul class="page-nav">
                 <li class="page-nav__itm page-nav__itm_type_active">
-                    <span class="page-nav__link">Список заводов</span>
+                    <span class="page-nav__link">Заводы</span>
                 </li>
-                <li class="page-nav__itm page-nav__itm_type_active">
-                    <a href="#" class="page-nav__link">Заводы на карте</a>
+                <li class="page-nav__itm">
+                    <a href="#" class="page-nav__link">Тарифная сетка</a>
+                </li>
+                <li class="page-nav__itm">
+                    <a href="#" class="page-nav__link">Товарные группы</a>
+                </li>
+                <li class="page-nav__itm">
+                    <a href="#" class="page-nav__link">Профиль</a>
                 </li>
             </ul>
         </div>
@@ -29,12 +35,13 @@
             <div class="page">
                 <div class="page__header">
                     <h1>Заводы</h1>
-                    <a href="#" class="btn btn-primary mt-4">Добавить завод</a>
+                    <button type="button" class="btn btn-info mt-4" data-toggle="modal" data-target="#modal-add-factory">Добавить завод</button>
                 </div>
                 <div class="table-responsive mt-5">
-                    <table class="table table-hover">
+                    <table class="table table-hover" id="plants-table">
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th scope="col">Название</th>
                                 <th scope="col">Адрес</th>
                                 <th scope="col">Сайт</th>
@@ -43,6 +50,7 @@
                         </thead>
                         <tbody>
                             <tr onclick="window.location.href='/factory.html'; return false">
+                                <td>1</td>
                                 <td>АЛЬТЕРНАТИВА СВД</td>
                                 <td>Ярославль, Россия, 1-й Промышленный проезд, 14</td>
                                 <td>http://xn-----7kcabgbgn6aq0cejla2afiuf2q.xn--p1ai/</td>
@@ -61,6 +69,7 @@
                                 </td>
                             </tr>
                             <tr onclick="window.location.href='/factory.html'; return false">
+                                <td>2</td>
                                 <td>Пожарное оборудование НН</td>
                                 <td>Нижний Новгород, Воротынская ул., 2, офис 108, этаж 2</td>
                                 <td>po112nn.ru</td>
@@ -79,6 +88,7 @@
                                 </td>
                             </tr>
                             <tr onclick="window.location.href='/factory.html'; return false">
+                                <td>3</td>
                                 <td>Металлоторг</td>
                                 <td>Россия, Республика Мордовия, Саранск, Александровское шоссе, 39</td>
                                 <td>metallotorg.ru</td>
@@ -91,6 +101,7 @@
                                 </td>
                             </tr>
                             <tr onclick="window.location.href='/factory.html'; return false">
+                                <td>4</td>
                                 <td>Рязанский завод ЖБИ-6</td>
                                 <td>Россия, Рязань, улица Ленинского Комсомола, 149</td>
                                 <td>rzgbi-6.ru</td>
@@ -108,6 +119,19 @@
             </div>
         </div>
     </div>
+    <div aria-live="polite" aria-atomic="true" style="position: fixed; min-height: 200px; top: 91px; right: 37px; min-width: 200px; z-index: 1051;">
+        <div class="toast fade" style="position: absolute; top: 0; right: 0;">
+            <div class="toast-header">
+                <strong class="toast-header__text mr-auto">Изменение данных</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+            </div>
+        </div>
+    </div>
+    //= dist/template/modal/modal-add-factory.html
     <script src="dist/js/main.js"></script>
 </body>
 

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-100">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Тарифная сетка</title>
+    <link rel="stylesheet" href="dist/css/main.css">
+    <script src="dist/js/critical.js"></script>
+</head>
+
+<body class="d-flex flex-column h-100">
+    <!--Импортируем header-->
+    //= dist/template/header/header.html
+    <!--/Импортируем header-->
+    <div class="content">
+        <div class="content__aside">
+            <ul class="page-nav">
+                <li class="page-nav__itm page-nav__itm_type_active">
+                    <span class="page-nav__link">Заводы</span>
+                </li>
+                <li class="page-nav__itm">
+                    <a href="#" class="page-nav__link">Тарифная сетка</a>
+                </li>
+                <li class="page-nav__itm">
+                    <a href="#" class="page-nav__link">Товарные группы</a>
+                </li>
+                <li class="page-nav__itm">
+                    <a href="#" class="page-nav__link">Профиль</a>
+                </li>
+            </ul>
+        </div>
+        <div class="content__main">
+            <div class="page">
+                <div class="page__header">
+                <h1>Тарифная сетка</h1>
+                <button type="button" class="btn btn-info mt-4" data-toggle="collapse" data-target="#tonnage" aria-expanded="false" aria-controls="tonnage">Изменить</button>
+                <form id="tonnage" name="tonnage" method="post" action="dist/server/tonnage.php" class="tonnage-form form collapse mt-5 mb-5">
+                    <h3 class="mb-3">Изменить тарифную сетку</h3>
+                    <div class="tonnage-form__content">
+                        <div class="form-group">
+                            <label for="tonnageName0">Ввведите тоннаж</label>
+                            <input name="tonnageName0" type="text" class="form-control mb-3" id="tonnageName0" value="20т" placeholder="Введите тоннаж" required>
+                            <label for="tonnagePrice100km0">Ввведите стоимость до 100 км в руб</label>
+                            <input name="tonnagePrice100km0" type="text" class="form-control mb-3" id="tonnagePrice100km0" value="50" placeholder="Введите стоимость в рублях" required>
+                            <label for="tonnagePrice500km0">Ввведите стоимость до 500 км в руб</label>
+                            <input name="tonnagePrice500km0'" type="text" class="form-control mb-3" id="tonnagePrice500km0" value="25" placeholder="Введите стоимость в рублях" required>
+                            <label for="tonnagePrice1000km0">Ввведите стоимость до 1000 км в руб</label>
+                            <input name="tonnagePrice1000km0" type="text" class="form-control mb-3" id="tonnagePrice1000km0" value="10" placeholder="Введите стоимость в рублях" required>
+                            <button type="button" class="btn btn-sm btn-danger mt-2 mb-3 js-delete-tonnage-pos">Удалить поле</button>
+                        </div>
+                        <div class="form-group">
+                            <label for="tonnageName1">Ввведите тоннаж</label>
+                            <input name="tonnageName1" type="text" class="form-control mb-3" id="tonnageName1" value="10т" placeholder="Введите тоннаж" required>
+                            <label for="tonnagePrice100km1">Ввведите стоимость до 100 км в руб</label>
+                            <input name="tonnagePrice100km1" type="text" class="form-control mb-3" id="tonnagePrice100km1" value="25" placeholder="Введите стоимость в рублях" required>
+                            <label for="tonnagePrice500km1">Ввведите стоимость до 500 км в руб</label>
+                            <input name="tonnagePrice500km1'" type="text" class="form-control mb-3" id="tonnagePrice500km1" value="12.5" placeholder="Введите стоимость в рублях" required>
+                            <label for="tonnagePrice1000km1">Ввведите стоимость до 1000 км в руб</label>
+                            <input name="tonnagePrice1000km1" type="text" class="form-control mb-3" id="tonnagePrice1000km1" value="7.5" placeholder="Введите стоимость в рублях" required>
+                            <button type="button" class="btn btn-sm btn-danger mt-2 mb-3 js-delete-tonnage-pos">Удалить поле</button>
+                        </div>
+                        <div class="form-group">
+                            <label for="tonnageName2">Ввведите тоннаж</label>
+                            <input name="tonnageName2" type="text" class="form-control mb-3" id="tonnageName2" value="5т" placeholder="Введите тоннаж" required>
+                            <label for="tonnagePrice100km2">Ввведите стоимость до 100 км в руб</label>
+                            <input name="tonnagePrice100km2" type="text" class="form-control mb-3" id="tonnagePrice100km2" value="10" placeholder="Введите стоимость в рублях" required>
+                            <label for="tonnagePrice500km2">Ввведите стоимость до 500 км в руб</label>
+                            <input name="tonnagePrice500km2'" type="text" class="form-control mb-3" id="tonnagePrice500km2" value="5" placeholder="Введите стоимость в рублях" required>
+                            <label for="tonnagePrice1000km2">Ввведите стоимость до 1000 км в руб</label>
+                            <input name="tonnagePrice1000km2" type="text" class="form-control mb-3" id="tonnagePrice1000km2" value="2" placeholder="Введите стоимость в рублях" required>
+                            <button type="button" class="btn btn-sm btn-danger mt-2 mb-3 js-delete-tonnage-pos">Удалить поле</button>
+                        </div>
+                    </div>
+                    <div>
+                        <button id="tonnage-add" type="button" class="btn btn-sm btn-info  mt-3">Добавить поле</button>
+                    </div>
+                    <button type="submit" class="btn btn-success mt-5">Изменить</button>
+                </form>
+                <div class="table-responsive mt-5">
+                    <table class="table" id="tonnage-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Тоннаж</th>
+                                <th scope="col">Стоимость за км (руб) до 100 км</th>
+                                <th scope="col">Стоимость за км (руб) до 500 км</th>
+                                <th scope="col">Стоимость за км (руб) до 1000 км</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>20т</td>
+                                <td>50</td>
+                                <td>25</td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <td>10т</td>
+                                <td>25</td>
+                                <td>12.5</td>
+                                <td>7.5</td>
+                            </tr>
+                            <tr>
+                                <td>5т</td>
+                                <td>10</td>
+                                <td>5</td>
+                                <td>2</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div aria-live="polite" aria-atomic="true" style="position: fixed; min-height: 200px; top: 91px; right: 37px; min-width: 200px; z-index: 1051;">
+        <div class="toast fade" style="position: absolute; top: 0; right: 0;">
+            <div class="toast-header">
+                <strong class="toast-header__text mr-auto">Изменение данных</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+            </div>
+        </div>
+    </div>
+    //= dist/template/modal/modal-add-factory.html
+    <script src="dist/js/main.js"></script>
+</body>
+
+</html>

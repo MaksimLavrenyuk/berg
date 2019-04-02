@@ -11,8 +11,12 @@
 //= ../../../../node_modules/bootstrap/js/dist/util.js
 // тултипы
 //= ../../../../node_modules/bootstrap/js/dist/tooltip.js
-
-
+// коллапс
+//= ../../../../node_modules/bootstrap/js/dist/collapse.js
+// тосты
+//= ../../../../node_modules/bootstrap/js/dist/toast.js
+// модальное окно
+//= ../../../../node_modules/bootstrap/js/dist/modal.js
 
 // Импортируем jquery-ui
 //= ../../../../node_modules/jquery-ui/ui/widget.js

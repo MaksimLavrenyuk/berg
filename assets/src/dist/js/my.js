@@ -20,7 +20,7 @@ $(document).ready(function() {
 	    }
 	}
 
-	preloadImages(["dist/img/preloader-circular.svg"]);
+	preloadImages(["dist/img/preloader.svg", "dist/img/preloader-circular.svg"]);
 });
 
 
@@ -38,3 +38,30 @@ $(document).ready(function() {
 
 // Импортируем добавление товарной группы
 //= add-product/add-product.js
+
+// Импортируем добавление информации о заводе
+//= factory-add-info/factory-add-info.js
+
+// Импортируем изменение информации о заводе
+//= factory-change-info/factory-change-info.js
+
+// Импортируем изменение списка групп
+//= product-group-list/product-group-list.js
+
+// Импортируем добавление завода
+//= add-factory/add-factory.js
+
+// Импортируем тосты
+//= toast/toast.js
+
+// Импортируем тоннаж
+//= tonnage/tonnage.js
+
+// Импортируем добавление поля (для всего кроме тоннажа)
+//= add-input/add-input.js
+
+// Импортируем формы
+//= form/form.js
+
+// Импортируем пароль
+//= password/password.js
