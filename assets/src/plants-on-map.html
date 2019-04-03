@@ -71,7 +71,8 @@
                         factories = new ymaps.GeoObjectCollection({
                             properties: {
                                 id: 'factories',
-                                name: 'Заводы'
+                                name: 'Заводы',
+
                             }
                         });
 
@@ -80,10 +81,10 @@
                             id: 'factories-' + i,
                             balloonContent: data.factoryList[i].factoryAddress,
                             hintContent: data.factoryList[i].factoryAddress,
-                            iconCaption: data.factoryList[i].factoryName,
+                            iconContent: data.factoryList[i].factoryName
                         }));
                     };
-
+                    factories.options.set('preset', 'islands#redStretchyIcon');
                     visible.add(factories);
                     myMap2.geoObjects.add(visible);
                     myMap2.margin.addArea({
@@ -151,7 +152,7 @@
                                         checkZoomRange: true,
                                         useMapMargin: true
                                     });
-                                    placemark.options.set('preset', 'islands#greenIcon');
+                                    placemark.options.set('preset', 'islands#greenStretchyIcon');
                                 } else {
                                     placemark.options.unset('preset');
                                 }
@@ -160,13 +161,10 @@
                         
                     };
                     factories.get(1).events.add('click', function () {
-                        myMap2.panTo(factories.get(1).geometry.getCoordinates(), {
-                            delay: 0,
-                            flying: 1,
-                            callback : function () {
-                                myMap2.openBalloon(myMap2.getCenter(), "Hello");
-                            }
-                        }); 
+                        myMap2.setCenter(factories.get(1).geometry.getCoordinates(), 7, {
+                            checkZoomRange: true,
+                            useMapMargin: true
+                        });
                     });
 
                 };

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-100">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Расчет доставки из точки А в точку Б</title>
+    <link rel="stylesheet" href="dist/css/main.css">
+    <script src="dist/js/critical.js"></script>
+</head>
+
+<body class="d-flex flex-column h-100">
+    <!--Импортируем header-->
+    //= dist/template/header/header.html
+    <!--/Импортируем header-->
+    <div class="content">
+        <div class="content__aside">
+            <ul class="page-nav">
+                <li class="page-nav__itm page-nav__itm_type_active">
+                    <span class="page-nav__link">Заводы</span>
+                </li>
+                <li class="page-nav__itm">
+                    <a href="#" class="page-nav__link">Тарифная сетка</a>
+                </li>
+                <li class="page-nav__itm">
+                    <a href="#" class="page-nav__link">Товарные группы</a>
+                </li>
+                <li class="page-nav__itm">
+                    <a href="#" class="page-nav__link">Профиль</a>
+                </li>
+            </ul>
+        </div>
+        <div class="content__main content__main_type_map">
+            <div id="map" class="map"></div>
+        </div>
+    </div>
+    <script src="dist/js/main.js"></script>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=fd9a221e-d6d7-41f0-aaf6-ed3c458a2caa&lang=ru_RU" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+    // Функция ymaps.ready() будет вызвана, когда
+    // загрузятся все компоненты API, а также когда будет готово DOM-дерево.
+    $(document).ready(function() {
+        $.ajax({
+            url: 'dist/server/a-to-b.php',
+            type: 'get',
+            dataType: 'json',
+            success: function(data) {
+                var myMap3;
+                var tonnage = data.tonnage;
+                var moscowRegionCoords = data.bookshelf;
+                ymaps.ready(initAtoB);
+
+                function initAtoB() {
+                    // Стоимость за километр.
+                    var DELIVERY_TARIFF = 20,
+                        // Минимальная стоимость.
+                        MINIMUM_COST = 500,
+                        myMap3 = new ymaps.Map('map', {
+                            center: [55.76, 37.64],
+                            controls: [],
+                            // Уровень масштабирования. Допустимые значения:
+                            // от 0 (весь мир) до 19.
+                            zoom: 7
+                        }),
+                        // Создадим панель маршрутизации.
+                        routePanelControl = new ymaps.control.RoutePanel({
+                            options: {
+                                // Добавим заголовок панели.
+                                showHeader: true,
+                                title: 'Расчёт доставки'
+                            }
+                        }),
+                        zoomControl = new ymaps.control.ZoomControl({
+                            options: {
+                                size: 'small',
+                                float: 'none',
+                                position: {
+                                    bottom: 145,
+                                    right: 10
+                                }
+                            }
+                        });
+                    // Пользователь сможет построить только автомобильный маршрут.
+                    routePanelControl.routePanel.options.set({
+                        types: { auto: true }
+                    });
+
+                    // Если вы хотите задать неизменяемую точку "откуда", раскомментируйте код ниже.
+                    /*routePanelControl.routePanel.state.set({
+                        fromEnabled: false,
+                        from: 'Москва, Льва Толстого 16'
+                     });*/
+
+                    myMap3.controls.add(routePanelControl).add(zoomControl);
+                    var polygonMoscow = new ymaps.Polygon([moscowRegionCoords], {
+                        hintContent: "Московская область"
+                    }, {
+                        fillColor: '#6699ff',
+                        // Делаем полигон прозрачным для событий карты.
+                        interactivityModel: 'default#transparent',
+                        strokeWidth: 8,
+                        opacity: 0.5
+                    });
+                    //добавляем московскую область на карту
+                    var polygonMoscowResult = ymaps.geoQuery(polygonMoscow).addToMap(myMap3);
+
+                    // Получим ссылку на маршрут.
+                    routePanelControl.routePanel.getRouteAsync().then(function(route) {
+
+                        // Зададим максимально допустимое число маршрутов, возвращаемых мультимаршрутизатором.
+                        route.model.setParams({ results: 1 }, true);
+
+                        // Повесим обработчик на событие построения маршрута.
+                        route.model.events.add('requestsuccess', function() {
+
+
+
+                            var activeRoute = route.getActiveRoute();
+
+                            if (activeRoute) {
+                                // Получим протяженность маршрута.
+                                var length = route.getActiveRoute().properties.get("distance");
+                                var deliveryPointCoords = routePanelControl.routePanel.state.get("to");
+                                var priceConteiner = "";
+                                var wayKm = length.value / 1000;
+
+                                //console.log(points.length);
+                                // проверяем попадает ли точка доставки в Московскую область
+                                var resultMoscow = polygonMoscowResult.searchContaining(deliveryPointCoords);
+                                console.log(resultMoscow.getLength());
+                                // если попадает
+                                if (resultMoscow.getLength()) {
+                                    // считаем стоимость пути
+                                    for (var t = 0, tlen = tonnage.length; t < tlen; t++) {
+                                        var tonnageName = tonnage[t].tonnageName;
+                                        if (wayKm  < 100) {
+                                            var tonnagePrice = +tonnage[t].tonnagePrice100km * wayKm * 1.1;
+                                            tonnagePrice = Math.round(tonnagePrice * 100) / 100;
+                                            priceConteiner = priceConteiner + '<li>Тоннаж: ' + tonnageName + '<br>Стоимость: <strong>' + tonnagePrice + ' руб.</strong></li>';
+                                        } else if ((wayKm  > 100) && (wayKm < 500)) {
+                                            var tonnagePrice = +tonnage[t].tonnagePrice500km * wayKm * 1.1;
+                                            tonnagePrice = Math.round(tonnagePrice * 100) / 100;
+                                            priceConteiner = priceConteiner + '<li>Тоннаж: ' + tonnageName + '<br>Стоимость: <strong>' + tonnagePrice + ' руб.</strong></li>';
+                                        } else if ((wayKm > 500) && (wayKm < 1000)) {
+                                            var tonnagePrice = +tonnage[t].tonnagePrice500km * wayKm * 1.1;
+                                            tonnagePrice = Math.round(tonnagePrice * 100) / 100;
+                                            priceConteiner = priceConteiner + '<li>Тоннаж: ' + tonnageName + '<br>Стоимость: <strong>' + tonnagePrice + ' руб.</strong></li>';
+                                        }
+                                    };
+                                } else {
+                                    // считаем стоимость пути
+                                    for (var t = 0, tlen = tonnage.length; t < tlen; t++) {
+                                        var tonnageName = tonnage[t].tonnageName;
+                                        if (wayKm  < 100) {
+                                            var tonnagePrice = +tonnage[t].tonnagePrice100km * wayKm * 1.1;
+                                            tonnagePrice = Math.round(tonnagePrice * 100) / 100;
+                                            priceConteiner = priceConteiner + '<li>Тоннаж: ' + tonnageName + '<br>Стоимость: <strong>' + tonnagePrice + ' руб.</strong></li>';
+                                        } else if ((wayKm  > 100) && (wayKm < 500)) {
+                                            var tonnagePrice = +tonnage[t].tonnagePrice500km * wayKm * 1.1;
+                                            tonnagePrice = Math.round(tonnagePrice * 100) / 100;
+                                            priceConteiner = priceConteiner + '<li>Тоннаж: ' + tonnageName + '<br>Стоимость: <strong>' + tonnagePrice + ' руб.</strong></li>';
+                                        } else if ((wayKm > 500) && (wayKm < 1000)) {
+                                            var tonnagePrice = +tonnage[t].tonnagePrice500km * wayKm * 1.1;
+                                            tonnagePrice = Math.round(tonnagePrice * 100) / 100;
+                                            priceConteiner = priceConteiner + '<li>Тоннаж: ' + tonnageName + '<br>Стоимость: <strong>' + tonnagePrice + ' руб.</strong></li>';
+                                        }
+                                    };
+                                };
+
+                                
+
+                                    // Создадим макет содержимого балуна маршрута.
+                                var balloonContentLayout = ymaps.templateLayoutFactory.createClass(
+                                        '<span>Расстояние: ' + length.text + '.</span><br/>' +
+                                        '<div style="font-weight: bold; font-style: italic">Стоимость доставки: <ul>' + priceConteiner + '</ul></div>');
+                                // Зададим этот макет для содержимого балуна.
+                                route.options.set('routeBalloonContentLayout', balloonContentLayout);
+                                // Откроем балун.
+                                activeRoute.balloon.open();
+                            }
+                        });
+
+                    });
+                    // Функция, вычисляющая стоимость доставки.
+                    function calculate(routeLength) {
+                        return Math.max(routeLength * DELIVERY_TARIFF, MINIMUM_COST);
+                    }
+                }
+
+            },
+            error: function(data) {
+                alert('Ошибка при отправке данных на сервер');
+            }
+        });
+    });
+    </script>
+</body>
+
+</html>
