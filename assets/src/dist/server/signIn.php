@@ -2,7 +2,7 @@
     header("Content-Type: text/html; charset=utf-8");
     mb_internal_encoding('UTF-8');
 
-    $msg = 'error';
+    $msg = 'done';
     //$msg = 'done';
 
     $result['msg'] = $msg;

@@ -9,7 +9,7 @@
 $factoryList = array(
  array(
    "factoryName" => "АЛЬТЕРНАТИВА СВД",
-   "factoryСoordinates" => "57.661351, 39.817618",
+   "factoryСoordinates" => "Ярославль, Россия, 1-й Промышленный проезд, 14",
    "factoryAddress" => "Ярославль, Россия, 1-й Промышленный проезд, 14",
    "factorySite" => "http://alternativa-svd.ru/",
    "factoryContacts" => array('mail@mail.com', '+79511040300', '+79511050301'),
@@ -17,7 +17,7 @@ $factoryList = array(
  ),
  array(
    "factoryName" => "Пожарное оборудование НН",
-   "factoryСoordinates" => "56.296983, 43.954738",
+   "factoryСoordinates" => "Нижний Новгород, Воротынская ул., 2, офис 108, этаж 2",
    "factoryAddress" => "Нижний Новгород, Воротынская ул., 2, офис 108, этаж 2",
    "factorySite" => "http://po112nn.ru/",
    "factoryContacts" => array('example@mail.ru', '89511050600', '+79301600301'),
@@ -25,7 +25,7 @@ $factoryList = array(
  ),
  array(
    "factoryName" => "Металлоторг",
-   "factoryСoordinates" => "54.228863, 45.220557",
+   "factoryСoordinates" => "Россия, Республика Мордовия, Саранск, Александровское шоссе, 39",
    "factoryAddress" => "Россия, Республика Мордовия, Саранск, Александровское шоссе, 39, ",
    "factorySite" => "http://www.metallotorg.ru/",
    "factoryContacts" => array('+7 (917) 999-13-16'),
@@ -33,7 +33,7 @@ $factoryList = array(
  ),
  array(
    "factoryName" => "Рязанский завод ЖБИ-6",
-   "factoryСoordinates" => "54.606095, 39.696844",
+   "factoryСoordinates" => "Россия, Рязань, улица Ленинского Комсомола, 149",
    "factoryAddress" => "Россия, Рязань, улица Ленинского Комсомола, 149",
    "factorySite" => "http://www.rzgbi-6.ru/",
    "factoryContacts" => array('+7 (917) 999-13-16'),

@@ -76,22 +76,55 @@
                             }
                         });
 
-                    for (var i = 0, l = data.factoryList.length; i < l; i++) {
-                        factories.add(new ymaps.Placemark(data.factoryList[i].factoryСoordinates.split(', '), {
-                            id: 'factories-' + i,
-                            balloonContent: data.factoryList[i].factoryAddress,
-                            hintContent: data.factoryList[i].factoryAddress,
-                            iconContent: data.factoryList[i].factoryName
-                        }));
-                    };
-                    factories.options.set('preset', 'islands#redStretchyIcon');
-                    visible.add(factories);
-                    myMap2.geoObjects.add(visible);
-                    myMap2.margin.addArea({
-                            right: 700
-                     });
 
-                    myMap2.setBounds(myMap2.geoObjects.getBounds());
+
+
+                    function makeMarkFactory(address, baloonContent, hintContent, iconContent, i, factories, visible) {
+                        ymaps.geocode(address, {
+                            results: 1
+                        }).then(function(res) {
+                            // Выбираем первый результат геокодирования.
+                            var firstObj = res.geoObjects.get(0),
+                                // Координаты геообъекта.
+                                coords = firstObj.geometry.getCoordinates();
+
+                            firstObj.options.set('preset', 'islands#redStretchyIcon');
+                            firstObj.properties.set({
+                                id: 'factories-' + i,
+                                balloonContent: baloonContent,
+                                hintContent: hintContent,
+                                iconContent: iconContent
+                            });
+                            console.log('Проверка')
+                            /*
+                            {
+                                id: 'factories-' + i,
+                                balloonContent: baloonContent,
+                                hintContent: hintContent,
+                                iconContent: iconContent
+                            }
+                            */
+                            myMap2.geoObjects.add(firstObj);
+                            firstObj.events.add('click', function() {
+                                myMap2.setCenter(coords, 7, {
+                                    checkZoomRange: true,
+                                    useMapMargin: true
+                                });
+                            });
+                        });
+                    };
+
+
+                    for (var i = 0, l = data.factoryList.length; i < l; i++) {
+                        makeMarkFactory(data.factoryList[i].factoryСoordinates, data.factoryList[i].factoryAddress, data.factoryList[i].factoryAddress, data.factoryList[i].factoryName, i);
+                    };
+
+
+                    myMap2.margin.addArea({
+                        right: 700
+                    });
+
+
 
 
                     $('.factory-map-list__itm').click(function() {
@@ -105,7 +138,7 @@
                         };
 
                         ProductlistItm = ProductlistItm.prop('outerHTML');
-                        
+
                         var factoryContacts;
 
                         // формируем список контактов
@@ -118,7 +151,7 @@
                                 var factoryContactsText = data.factoryList[idFactoryShort].factoryContacts[q];
                                 var factoryContactsLink;
 
-                                
+
                                 $('<li class="product-info-contacts__itm"><span>' + factoryContactsText + '</span></li>').appendTo(factoryContacts);
                             };
 
@@ -142,30 +175,26 @@
 
                     // Ищем нужную метку и открываем/закрываем ее балун.
                     function itemToggle(id) {
-                        
-                            for (var n = 0, len = factories.getLength(); n < len; n++) {
-                                var placemark = factories.get(n);
-                                if (placemark.properties.get('id') === id) {
-                                    var placemarkCood = placemark.geometry.getCoordinates();
-                                    console.log(placemarkCood)
-                                    myMap2.setCenter(placemarkCood, 7, {
-                                        checkZoomRange: true,
-                                        useMapMargin: true
-                                    });
-                                    placemark.options.set('preset', 'islands#greenStretchyIcon');
-                                } else {
-                                    placemark.options.unset('preset');
-                                }
 
+                        for (var n = 0, len =  myMap2.geoObjects.getLength(); n < len; n++) {
+                            var placemark =  myMap2.geoObjects.get(n);
+                            if (placemark.properties.get('id') === id) {
+                                var placemarkCood = placemark.geometry.getCoordinates();
+                                console.log(placemarkCood)
+                                myMap2.setCenter(placemarkCood, 7, {
+                                    checkZoomRange: true,
+                                    useMapMargin: true
+                                });
+                                placemark.options.set('preset', 'islands#greenStretchyIcon');
+                            } else {
+                                placemark.options.set('preset', 'islands#redStretchyIcon');
                             }
-                        
+
+                        }
+
                     };
-                    factories.get(1).events.add('click', function () {
-                        myMap2.setCenter(factories.get(1).geometry.getCoordinates(), 7, {
-                            checkZoomRange: true,
-                            useMapMargin: true
-                        });
-                    });
+
+
 
                 };
 

@@ -16,6 +16,7 @@ $(document).ready(function() {
         var width = $("[type=submit]", this).css("width");
         var url = $(this).attr('action');
         var password = $(this).find('[type="password"]');
+        var redirectLink = $(this).data('redirect-link');
         $.ajax({
             beforeSend: $.proxy(function() {
                 $(this).find('input').prop('disabled', true);
@@ -41,7 +42,7 @@ $(document).ready(function() {
 	                submit.html("Войти");
 	                submit.prop('disabled', false);
             	} else {
-            		window.location.href='/search-product.html';
+            		window.location.href=redirectLink;
             	}
             }, this),
             error: function(data) {
