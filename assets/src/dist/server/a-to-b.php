@@ -6,7 +6,6 @@
     $data = file_get_contents($filename);
     $bookshelf = json_decode($data, TRUE); // Если нет TRUE то получает объект, а не массив.
 
-    $CityName = 'Москва';
     $tonnage = array(
       array(
         "tonnageName" => "20т",

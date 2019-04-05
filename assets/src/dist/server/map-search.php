@@ -27,6 +27,7 @@
         "tonnagePrice1000km" => "2"
       )
     );
+    //$status = 'error';
     $status = 'ok';
     $msg = 'Ничего найдено';
 
