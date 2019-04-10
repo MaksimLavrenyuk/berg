@@ -51,6 +51,7 @@ $(document).ready(function() {
                         //var wayKm = 0;
                         var tonnage = data.tonnage;
                         var priceWay = 0;
+                        var cityName = data.CityName;
                         // создам новый объект содержащий информацю о заводах
                         var FactoryData = {};
                         // скопируем в него все свойства 
@@ -67,7 +68,7 @@ $(document).ready(function() {
                             var dataFactoryName = FactoryData[key].factoryName;
                             var dataFactory__productStock = FactoryData[key].productStockName;
                             var dataFactory__contacts = FactoryData[key].factoryContacts;
-                            createRoute('Москва', pointRoute, dataFactoryName, key, tonnage, dataFactory__productStock, dataFactory__contacts, dataMoscowRegionCoords);
+                            createRoute(cityName, pointRoute, dataFactoryName, key, tonnage, dataFactory__productStock, dataFactory__contacts, dataMoscowRegionCoords);
                         };
 
                         //открытие меню дополнительной информации
