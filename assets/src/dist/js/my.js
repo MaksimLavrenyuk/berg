@@ -65,3 +65,6 @@ $(document).ready(function() {
 
 // Импортируем пароль
 //= password/password.js
+
+// Добавить пользователя
+//= add-users/add-users.js

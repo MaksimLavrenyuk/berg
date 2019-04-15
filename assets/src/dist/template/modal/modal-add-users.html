@@ -1,0 +1,39 @@
+<div class="modal fade" id="modal-add-users" tabindex="-1" role="dialog" aria-labelledby="modal-add-users-Label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-uppercase" id="modal-add-users-Label">Добавить пользователя</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="add-users-form" name="addUsersForm" class="form_needs-validation" action="dist/server/add-users.php" method="post">
+                    <div class="form-group">
+                        <label for="add-users-name">Имя</label>
+                        <input name="name" type="text" class="form-control" id="add-users-name" placeholder="Введите имя сотрудника" required>
+                        <div class="valid-message"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="add-users-secondName">Фамилия</label>
+                        <input name="secondName" type="text" class="form-control" id="add-users-secondName" placeholder="Введите фамилию сотрудника" required>
+                        <div class="valid-message"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="add-users-email">Электронная почта</label>
+                        <input name="email" type="text" class="form-control" id="add-users-email" placeholder="Введите e-mail сотрудника" required>
+                        <div class="valid-message"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="add-users-password-1">Пароль сотрудника</label>
+                        <input name="password" type="text" class="form-control mb-2" id="add-users-password-1"  required>
+                        <small>введите пароль еще раз</small>
+                        <input name="password" type="text" class="form-control mt-2" id="add-users-password-2"  required>
+                        <div class="valid-message"></div>
+                    </div>
+                    <button type="submit" class="btn btn-success mt-4" disabled>Добавить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

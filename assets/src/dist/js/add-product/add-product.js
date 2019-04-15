@@ -33,7 +33,9 @@ $(document).ready(function() {
                             '</td>'+
                     	'</tr>'
                     ).appendTo('#product-groups-table tbody');
-
+                    $('.js-delete-product-group').click(function(e) {
+                        deleteGroup($(this));
+                    });
 
             		//поведение кнопок
 	                $(this).find('input').prop('disabled', false);
@@ -53,11 +55,14 @@ $(document).ready(function() {
         });
     });
     $('.js-delete-product-group').click(function(e) {
-        var submit = $(this);
-        var width = $(this).css("width");
+        deleteGroup($(this));
+    });
+    function deleteGroup(target) {
+        var submit = target;
+        var width = target.css("width");
         var url = $('#productGroupAdd').attr('action');
-        var btnText = $(this).text();
-        var productGroupID = $(this).closest('[data-group-id]').data('group-id');
+        var btnText = target.text();
+        var productGroupID = target.closest('[data-group-id]').data('group-id');
         $.ajax({
             beforeSend: $.proxy(function() {
                 submit.prop('disabled', true);
@@ -73,7 +78,7 @@ $(document).ready(function() {
             dataType: 'json',
             success: $.proxy(function(data) {
                 if (data.msg == "Удален") {
-                    $(this).closest('[data-group-id]').remove();
+                    target.closest('[data-group-id]').remove();
                     //поведение кнопок
                     submit.html("");
                     submit.css('min-width', 'none');
@@ -83,10 +88,10 @@ $(document).ready(function() {
                     $('.toast').toast('show');
                 };
 
-            }, this),
+            }, target),
             error: function(data) {
                 alert('Ошибка при отправке данных на сервер');
             }
         });
-    });
+    }
 });

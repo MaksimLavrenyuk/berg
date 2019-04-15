@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-100">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Пользователи</title>
+    <link rel="stylesheet" href="dist/css/main.css">
+    <script src="dist/js/critical.js"></script>
+</head>
+
+<body class="d-flex flex-column h-100">
+    <!--Импортируем header-->
+    //= dist/template/header/header.html
+    <!--/Импортируем header-->
+    <div class="content">
+        <div class="content__aside">
+            <ul class="page-nav">
+                <li class="page-nav__itm page-nav__itm_type_active">
+                    <span class="page-nav__link">Заводы</span>
+                </li>
+                <li class="page-nav__itm">
+                    <a href="#" class="page-nav__link">Тарифная сетка</a>
+                </li>
+                <li class="page-nav__itm">
+                    <a href="#" class="page-nav__link">Товарные группы</a>
+                </li>
+                <li class="page-nav__itm">
+                    <a href="#" class="page-nav__link">Профиль</a>
+                </li>
+            </ul>
+        </div>
+        <div class="content__main">
+            <div class="page">
+                <div class="page__header">
+                    <h1>Пользователи</h1>
+                    <button type="button" class="btn btn-info mt-4" data-toggle="modal" data-target="#modal-add-users">Добавить пользователя</button>
+                </div>
+                <div class="table-responsive mt-5">
+                    <table class="table" id="table-users">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th scope="col">Имя</th>
+                                <th scope="col">Фамилия</th>
+                                <th scope="col">E-mail</th>
+                                <th scope="col">Пароль</th>
+                                <th width="100"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-user-id="1">
+                                <td>Иван</td>
+                                <td>Иванов</td>
+                                <td>example@mail.ru</td>
+                                <td>1111</td>
+                                <td  width="100">
+                                    <button type="button" class="btn btn-danger btn-sm js-delete-user">Удалить</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div aria-live="polite" aria-atomic="true" style="position: fixed; min-height: 200px; top: 91px; right: 37px; min-width: 200px; z-index: 1051;">
+        <div class="toast fade" style="position: absolute; top: 0; right: 0;">
+            <div class="toast-header">
+                <strong class="toast-header__text mr-auto">Изменение данных</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+            </div>
+        </div>
+    </div>
+    //= dist/template/modal/modal-add-users.html
+    <script src="dist/js/main.js"></script>
+</body>
+
+</html>
