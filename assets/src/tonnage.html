@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Тарифная сетка</title>
+    <title>Тоннаж 20 т</title>
     <link rel="stylesheet" href="dist/css/main.css">
     <script src="dist/js/critical.js"></script>
 </head>
@@ -34,66 +34,53 @@
         <div class="content__main">
             <div class="page">
                 <div class="page__header">
-                <h1>Тарифная сетка</h1>
+                <h1>Тоннаж 20 т</h1>
                 <button type="button" class="btn btn-info mt-4" data-toggle="collapse" data-target="#tonnage" aria-expanded="false" aria-controls="tonnage">Изменить</button>
-                <form id="tonnage" name="tonnage" method="post" action="dist/server/tonnage.php" class="tonnage-form form collapse mt-5 mb-5">
-                    <h3 class="mb-3">Изменить тарифную сетку</h3>
+                <form id="tonnage" name="tonnage" method="post" action="dist/server/tonnageSpec.php" class="tonnage-form form collapse mt-5 mb-5">
+                    <h3 class="mb-3">Изменить характеристики тоннажа</h3>
                     <div class="tonnage-form__content">
                         <div class="form-group">
-                            <label for="tonnageName0">Ввведите тоннаж</label>
-                            <input name="tonnageName0" type="text" class="form-control mb-3" id="tonnageName0" value="20" placeholder="Введите тоннаж" required>
-                            <button type="button" class="btn btn-sm btn-danger mt-2 mb-3 js-delete-tonnage-pos">Удалить поле</button>
-                        </div>
-                        <!--
-                        <div class="form-group">
-                            <label for="tonnageName1">Ввведите тоннаж</label>
-                            <input name="tonnageName1" type="text" class="form-control mb-3" id="tonnageName1" value="10т" placeholder="Введите тоннаж" required>
-                            <label for="tonnagePrice100km1">Ввведите стоимость до 100 км в руб</label>
-                            <input name="tonnagePrice100km1" type="text" class="form-control mb-3" id="tonnagePrice100km1" value="25" placeholder="Введите стоимость в рублях" required>
-                            <label for="tonnagePrice500km1">Ввведите стоимость до 500 км в руб</label>
-                            <input name="tonnagePrice500km1'" type="text" class="form-control mb-3" id="tonnagePrice500km1" value="12.5" placeholder="Введите стоимость в рублях" required>
-                            <label for="tonnagePrice1000km1">Ввведите стоимость до 1000 км в руб</label>
-                            <input name="tonnagePrice1000km1" type="text" class="form-control mb-3" id="tonnagePrice1000km1" value="7.5" placeholder="Введите стоимость в рублях" required>
-                            <button type="button" class="btn btn-sm btn-danger mt-2 mb-3 js-delete-tonnage-pos">Удалить поле</button>
+                            <label for="tonnageKm">Километраж (км).</label>
+                            <input name="tonnageKm" type="text" class="form-control mb-3" id="tonnageKm" placeholder="Введите километраж" required>
+                            <small>Введите максимальный километраж в поле. Например, поле "от 50 км до 70 км", введите 70</small>
                         </div>
                         <div class="form-group">
-                            <label for="tonnageName2">Ввведите тоннаж</label>
-                            <input name="tonnageName2" type="text" class="form-control mb-3" id="tonnageName2" value="5т" placeholder="Введите тоннаж" required>
-                            <label for="tonnagePrice100km2">Ввведите стоимость до 100 км в руб</label>
-                            <input name="tonnagePrice100km2" type="text" class="form-control mb-3" id="tonnagePrice100km2" value="10" placeholder="Введите стоимость в рублях" required>
-                            <label for="tonnagePrice500km2">Ввведите стоимость до 500 км в руб</label>
-                            <input name="tonnagePrice500km2'" type="text" class="form-control mb-3" id="tonnagePrice500km2" value="5" placeholder="Введите стоимость в рублях" required>
-                            <label for="tonnagePrice1000km2">Ввведите стоимость до 1000 км в руб</label>
-                            <input name="tonnagePrice1000km2" type="text" class="form-control mb-3" id="tonnagePrice1000km2" value="2" placeholder="Введите стоимость в рублях" required>
-                            <button type="button" class="btn btn-sm btn-danger mt-2 mb-3 js-delete-tonnage-pos">Удалить поле</button>
+                            <label for="tonnagePrice">Стоимость километра (руб).</label>
+                            <input name="tonnagePrice" type="text" class="form-control mb-3" id="tonnagePrice" placeholder="Введите стоимость" required>
                         </div>
-                        -->
-                    </div>
-                    <div>
-                        <button id="tonnage-add" type="button" class="btn btn-sm btn-info  mt-3">Добавить поле</button>
                     </div>
                     <button type="submit" class="btn btn-success mt-5">Изменить</button>
                 </form>
                 <div class="table-responsive mt-5">
-                    <table class="table" id="tonnage-table">
+                    <table class="table" id="tonnage-spec-table">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th scope="col">Тоннаж (т)</th>
+                                <th scope="col">Километраж (км)</th>
+                                <th scope="col">Стоимость за  км (руб)</th>
+                                <th  width="100"></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr onclick="window.location.href='/factory.html'; return false">
-                                <td>1</td>
-                                <td>20</td>
+                            <tr data-tonnage-spec-id="1">
+                                <td>70</td>
+                                <td>116</td>
+                                <td  width="100">
+                                    <button type="button" class="btn btn-danger btn-sm js-delete-tonnage-spec">Удалить</button>
+                                </td>
                             </tr>
-                            <tr onclick="window.location.href='/factory.html'; return false">
-                                <td>2</td>
-                                <td>10</td>
+                            <tr data-tonnage-spec-id="2">
+                                <td>80</td>
+                                <td>106</td>
+                                <td  width="100">
+                                    <button type="button" class="btn btn-danger btn-sm js-delete-tonnage-spec">Удалить</button>
+                                </td>
                             </tr>
-                            <tr onclick="window.location.href='/factory.html'; return false">
-                                <td>3</td>
-                                <td>5</td>
+                            <tr data-tonnage-spec-id="3">
+                                <td>90</td>
+                                <td>100</td>
+                                <td  width="100">
+                                    <button type="button" class="btn btn-danger btn-sm js-delete-tonnage-spec">Удалить</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
