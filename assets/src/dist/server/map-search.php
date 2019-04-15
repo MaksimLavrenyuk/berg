@@ -9,22 +9,34 @@
     $CityName = 'Москва';
     $tonnage = array(
       array(
-        "tonnageName" => "20т",
-        "tonnagePrice100km" => "50",
-        "tonnagePrice500km" => "25",
-        "tonnagePrice1000km" => "10"
+        "tonnageName" => "20",
+        "tonnageTariff" => array(
+            "50" => "119",
+            "300" => "126",
+            "400" => "130",
+            "500" => "100",
+            "700" => "90"
+            )
       ),
       array(
-        "tonnageName" => "10т",
-        "tonnagePrice100km" => "25",
-        "tonnagePrice500km" => "12.5",
-        "tonnagePrice1000km" => "7.5"
+        "tonnageName" => "10",
+        "tonnageTariff" => array(
+            "50" => "119",
+            "300" => "126",
+            "400" => "130",
+            "500" => "100",
+            "700" => "90"
+        )
       ),
       array(
-        "tonnageName" => "5т",
-        "tonnagePrice100km" => "10",
-        "tonnagePrice500km" => "5",
-        "tonnagePrice1000km" => "2"
+        "tonnageName" => "5",
+        "tonnageTariff" => array(
+            "50" => "119",
+            "300" => "126",
+            "400" => "130",
+            "500" => "100",
+            "700" => "90"
+        )
       )
     );
     //$status = 'error';

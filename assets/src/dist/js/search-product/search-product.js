@@ -147,38 +147,23 @@ function createRoute(firstPoint, secondPoint, factName, count, tonnage, stockInf
             // считаем стоимость пути
             for (var t = 0, tlen = tonnage.length; t < tlen; t++) {
                 var tonnageName = tonnage[t].tonnageName;
-                if (wayKm < 100) {
-                    var tonnagePrice = +tonnage[t].tonnagePrice100km * wayKm * 1.1;
-                    tonnagePrice = Math.round(tonnagePrice * 100) / 100;
-                    priceConteiner = priceConteiner + '<li>Тоннаж: ' + tonnageName + '<br>Стоимость: <strong>' + tonnagePrice + ' руб.</strong></li>';
-                } else if ((wayKm > 100) && (wayKm < 500)) {
-                    var tonnagePrice = +tonnage[t].tonnagePrice500km * wayKm * 1.1;
-                    tonnagePrice = Math.round(tonnagePrice * 100) / 100;
-                    priceConteiner = priceConteiner + '<li>Тоннаж: ' + tonnageName + '<br>Стоимость: <strong>' + tonnagePrice + ' руб.</strong></li>';
-                } else if ((wayKm > 500) && (wayKm < 1000)) {
-                    var tonnagePrice = +tonnage[t].tonnagePrice500km * wayKm * 1.1;
-                    tonnagePrice = Math.round(tonnagePrice * 100) / 100;
-                    priceConteiner = priceConteiner + '<li>Тоннаж: ' + tonnageName + '<br>Стоимость: <strong>' + tonnagePrice + ' руб.</strong></li>';
-                }
+                var tonnageTariff = tonnage[t].tonnageTariff;
+                var tonnageTariffArr = Object.keys(tonnageTariff);
+                var tonnageTariffNeededElem = filterRangeInPlace(tonnageTariffArr, wayKm);
+                var tonnagePrice = +tonnageTariff[tonnageTariffNeededElem] * wayKm * 1.1;
+                tonnagePrice = Math.round(tonnagePrice * 100) / 100;
+                priceConteiner = priceConteiner + '<li>Тоннаж: ' + tonnageName + 'т. <br>Стоимость: <strong>' + tonnagePrice + ' руб.</strong></li>';
             };
         } else {
 
-            // считаем стоимость пути
             for (var t = 0, tlen = tonnage.length; t < tlen; t++) {
                 var tonnageName = tonnage[t].tonnageName;
-                if (wayKm < 100) {
-                    var tonnagePrice = +tonnage[t].tonnagePrice100km * wayKm;
-                    tonnagePrice = Math.round(tonnagePrice * 100) / 100;
-                    priceConteiner = priceConteiner + '<li>Тоннаж: ' + tonnageName + '<br>Стоимость: <strong>' + tonnagePrice + ' руб.</strong></li>';
-                } else if ((wayKm > 100) && (wayKm < 500)) {
-                    var tonnagePrice = +tonnage[t].tonnagePrice500km * wayKm;
-                    tonnagePrice = Math.round(tonnagePrice * 100) / 100;
-                    priceConteiner = priceConteiner + '<li>Тоннаж: ' + tonnageName + '<br>Стоимость: <strong>' + tonnagePrice + ' руб.</strong></li>';
-                } else if ((wayKm > 500) && (wayKm < 1000)) {
-                    var tonnagePrice = +tonnage[t].tonnagePrice500km * wayKm;
-                    tonnagePrice = Math.round(tonnagePrice * 100) / 100;
-                    priceConteiner = priceConteiner + '<li>Тоннаж: ' + tonnageName + '<br>Стоимость: <strong>' + tonnagePrice + ' руб.</strong></li>';
-                }
+                var tonnageTariff = tonnage[t].tonnageTariff;
+                var tonnageTariffArr = Object.keys(tonnageTariff);
+                var tonnageTariffNeededElem = filterRangeInPlace(tonnageTariffArr, wayKm);
+                var tonnagePrice = +tonnageTariff[tonnageTariffNeededElem] * wayKm;
+                tonnagePrice = Math.round(tonnagePrice * 100) / 100;
+                priceConteiner = priceConteiner + '<li>Тоннаж: ' + tonnageName + ' т.<br>Стоимость: <strong>' + tonnagePrice + ' руб.</strong></li>';
             };
 
         };
@@ -223,4 +208,13 @@ function createRoute(firstPoint, secondPoint, factName, count, tonnage, stockInf
         });
 
     });
+}
+
+function filterRangeInPlace(arr, way) {
+    var result = arr[0];
+    for (var i = 0; i < arr.length; i++) {
+        result = arr[i];
+        if (way < arr[i]) break;
+    }
+    return result;
 }

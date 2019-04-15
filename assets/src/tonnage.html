@@ -35,14 +35,14 @@
             <div class="page">
                 <div class="page__header">
                 <h1>Тарифная сетка</h1>
-                <button type="button" class="btn btn-info mt-4" data-toggle="collapse" data-target="#tonnage" aria-expanded="false" aria-controls="tonnage">Добавить тоннаж</button>
+                <button type="button" class="btn btn-info mt-4" data-toggle="collapse" data-target="#tonnage" aria-expanded="false" aria-controls="tonnage">Изменить</button>
                 <form id="tonnage" name="tonnage" method="post" action="dist/server/tonnage.php" class="tonnage-form form collapse mt-5 mb-5">
                     <h3 class="mb-3">Изменить тарифную сетку</h3>
                     <div class="tonnage-form__content">
                         <div class="form-group">
-                            <label for="tonnageName">Ввведите тоннаж в тоннах</label>
-                            <input name="tonnageName" type="text" class="form-control mb-3" id="tonnageName" value="" placeholder="Введите тоннаж" required>
-                            <small>только цифры</small>
+                            <label for="tonnageName0">Ввведите тоннаж</label>
+                            <input name="tonnageName0" type="text" class="form-control mb-3" id="tonnageName0" value="20" placeholder="Введите тоннаж" required>
+                            <button type="button" class="btn btn-sm btn-danger mt-2 mb-3 js-delete-tonnage-pos">Удалить поле</button>
                         </div>
                         <!--
                         <div class="form-group">
@@ -72,10 +72,10 @@
                     <div>
                         <button id="tonnage-add" type="button" class="btn btn-sm btn-info  mt-3">Добавить поле</button>
                     </div>
-                    <button type="submit" class="btn btn-success mt-5">Добавить</button>
+                    <button type="submit" class="btn btn-success mt-5">Изменить</button>
                 </form>
                 <div class="table-responsive mt-5">
-                    <table class="table table-hover" id="tonnage-table">
+                    <table class="table" id="tonnage-table">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -83,15 +83,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr onclick="window.location.href='/tonnage.html'; return false">
+                            <tr onclick="window.location.href='/factory.html'; return false">
                                 <td>1</td>
                                 <td>20</td>
                             </tr>
-                            <tr onclick="window.location.href='/tonnage.html'; return false">
+                            <tr onclick="window.location.href='/factory.html'; return false">
                                 <td>2</td>
                                 <td>10</td>
                             </tr>
-                            <tr onclick="window.location.href='/tonnage.html'; return false">
+                            <tr onclick="window.location.href='/factory.html'; return false">
                                 <td>3</td>
                                 <td>5</td>
                             </tr>
